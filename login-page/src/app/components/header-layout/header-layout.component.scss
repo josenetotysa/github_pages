@@ -1,0 +1,14 @@
+header{
+    box-shadow: 0 4px 4px #00000083;
+    // text-align: center;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: var(--justify-content, center);;
+     
+}
+
+img{
+    width: auto;
+    height: 4em;
+}

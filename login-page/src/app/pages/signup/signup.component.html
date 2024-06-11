@@ -1,17 +1,19 @@
 <app-default-login-layout
     primaryBtnText="ENTRAR"
+    copyrightText="©Tysa Telecomunicações 2024."
+    copyrightTextContinue="Todos os direitos reservados."
     (submit)="submit()"
-    [disablePrimaryBtn]="!loginForm.valid"
+    [disablePrimaryBtn]="!signupForm.valid"
 >
 
-    <form [formGroup]="loginForm"> 
+    <form [formGroup]="signupForm"> 
         
         <app-primary-input
-            formControlName="login"
-            inputName="login"
+            formControlName="signup"
+            inputName="signup"
             type="text"
-            label="Login"
-            placeholder="Ex: 123456"
+            label="Seu nome"
+            placeholder="Ex: João Silva"
         >
         </app-primary-input>
 
@@ -22,8 +24,6 @@
             label="Senha"
         >
         </app-primary-input>
-
-        <span class="">Esqueceu a senha?</span>
         
     </form>
 </app-default-login-layout>

@@ -7,15 +7,12 @@
     align-items: center;
     justify-content: center;
     background-color: $bg-color;
-    height: 100%;
+    min-height: 100vh;
     
-
-    header{
-        box-shadow: 0 4px 4px #00000083;
+    app-header-layout{
         width: 100%;
-        text-align: center;
-        padding: 10px;
     }
+    
     main{
         height: 100%;
         display: flex;
@@ -23,6 +20,7 @@
         align-items: center;
         justify-content: center;
         width: 465px;
+        flex: 1;
 
         button{
             width: 100%;
@@ -35,21 +33,14 @@
             padding: 22px 0;
             text-transform: uppercase;
             cursor: pointer;
+
+            &:disabled{
+                opacity: 0.8;
+            }
         }
     }
-    footer{
-        background-color: $footer-color;
+
+    app-footer-layout{
         width: 100%;
-        text-align: center;
-        padding: 10px 0 18px 0;
-        span{
-
-        }
-        #copyTysa{
-
-        }
-        #copyAll{
-
-        }
     }
 }

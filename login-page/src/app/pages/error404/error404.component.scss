@@ -1,0 +1,25 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        padding-top: 20px;
+    }
+
+    h2{
+        padding-bottom: 15px;
+    }
+    li{
+        list-style-type: none;
+        padding-bottom: 5px;
+    }
+
+    a{
+        color: blue;
+        &:visited{
+            color: blue;
+        }
+    }
+}

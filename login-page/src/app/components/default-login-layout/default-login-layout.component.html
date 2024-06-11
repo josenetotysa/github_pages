@@ -1,18 +1,12 @@
 <div class="content">
-    <header>
-        <img src="/assets/svg/logo_tysa.svg" alt="">
-    </header>
+    <app-header-layout></app-header-layout>
     
     <main>
-          <ng-content></ng-content>
-         
-        <button>{{primaryBtnText}}</button>
-        
+        <ng-content></ng-content>
+        <button 
+        (click)="submit()"
+        [disabled]="disablePrimaryBtn"
+        >{{primaryBtnText}}</button>
     </main>
-    
-    <footer class="montserrat-400">
-        <div class=""></div>
-    <span id="copyTysa"><strong>{{copyrightText}}</strong></span>
-    <span id="copyAll"> {{copyrightTextContinue}}</span>
-    </footer>
+    <app-footer-layout></app-footer-layout>
 </div>
