@@ -1,6 +1,5 @@
 <app-default-login-layout
     primaryBtnText="ENTRAR"
-    (submit)="submit()"
     [disablePrimaryBtn]="!loginForm.valid"
 >
 
@@ -24,6 +23,8 @@
         </app-primary-input>
 
         <span class="">Esqueceu a senha?</span>
-        
+
+        <app-button-blue-click (click)="submit()">entrar</app-button-blue-click>
     </form>
+    
 </app-default-login-layout>

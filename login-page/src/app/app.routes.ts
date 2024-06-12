@@ -4,6 +4,9 @@ import { Error404Component } from './pages/error404/error404.component';
 import { NgModule } from '@angular/core';
 import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ListUsersComponent } from './pages/list-users/list-users.component';
+import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.component';
+import { OperadorasComponent } from './pages/operadoras/operadoras.component';
 
 export const routes: Routes = [
     {
@@ -19,6 +22,21 @@ export const routes: Routes = [
     {
         path: "home",
         component: HomeComponent
+    },
+
+    {
+        path: "listUsers",
+        component: ListUsersComponent
+    },
+
+    {
+        path: "portabilidade",
+        component: PortabilidadeComponent
+    },
+
+    {
+        path: "operadoras",
+        component: OperadorasComponent
     },
 
     { 

@@ -3,6 +3,7 @@ import { HeaderLayoutComponent } from '../header-layout/header-layout.component'
 import { FooterLayoutComponent } from '../footer-layout/footer-layout.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import { RouterModule } from '@angular/router'; // Importar RouterModule
 
 
 @Component({
@@ -12,8 +13,8 @@ import {MatButtonModule} from '@angular/material/button';
     HeaderLayoutComponent,
     FooterLayoutComponent,
     MatButtonModule, 
-    MatMenuModule
-
+    MatMenuModule,
+    RouterModule
   ],
   templateUrl: './default-layout.component.html',
   styleUrl: './default-layout.component.scss'

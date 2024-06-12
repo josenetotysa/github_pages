@@ -2,25 +2,24 @@
     <app-header-layout style="--justify-content: space-between;">
         <nav class="menu">
 
+            <button mat-button [routerLink]="['/home']">Home</button>
+    
             <button mat-button [matMenuTriggerFor]="userMenu">Usuários</button>
             <mat-menu #userMenu="matMenu">
-            <button mat-menu-item>Listar Usuários</button>
-            <button mat-menu-item>Cadastrar Novo</button>
+            <button mat-menu-item [routerLink]="['/listUsers']">Listar Usuários</button>
+            <button mat-menu-item [routerLink]="['/signup']">Cadastrar Novo</button>
             </mat-menu>
 
             <button mat-button [matMenuTriggerFor]="portMenu">Portabilidade</button>
             <mat-menu #portMenu="matMenu">
-            <button mat-menu-item>Listar Portabilidade</button>
+            <button mat-menu-item [routerLink]="['/portabilidade']">Listar Portabilidade</button>
             </mat-menu>
 
             <button mat-button [matMenuTriggerFor]="operMenu">Operadoras</button>
             <mat-menu #operMenu="matMenu">
-            <button mat-menu-item>Listar Operadoras</button>
+            <button mat-menu-item  [routerLink]="['/operadoras']">Listar Operadoras</button>
             </mat-menu>
 
-            <!-- <div class="menuUser"><a href="">Usuários</a></div>
-            <div class="menuPort">Portabilidade</div>
-            <div class="menuOper">Operadoras</div> -->
         </nav>
     </app-header-layout>
     

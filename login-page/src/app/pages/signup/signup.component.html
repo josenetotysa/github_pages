@@ -1,19 +1,37 @@
-<app-default-login-layout
-    primaryBtnText="ENTRAR"
-    copyrightText="©Tysa Telecomunicações 2024."
-    copyrightTextContinue="Todos os direitos reservados."
-    (submit)="submit()"
-    [disablePrimaryBtn]="!signupForm.valid"
->
+<app-default-layout
 
-    <form [formGroup]="signupForm"> 
+    primaryBtnText="Cadastrar"
+    
+    [disablePrimaryBtn]="!loginForm.valid">
+
+
+    <app-titles>Cadastrar novo usuário</app-titles>
+    <form [formGroup]="loginForm">
+
+        <app-primary-input
+            formControlName="name"
+            inputName="name"
+            type="text"
+            label="Nome Completo"
+            placeholder="João Silva"
+        >
+        </app-primary-input>
+
+        <app-primary-input
+            formControlName="email"
+            inputName="email"
+            type="email"
+            label="Email"
+            placeholder="joãosilva@example.com"
+        >
+        </app-primary-input>
         
         <app-primary-input
-            formControlName="signup"
-            inputName="signup"
+            formControlName="login"
+            inputName="login"
             type="text"
-            label="Seu nome"
-            placeholder="Ex: João Silva"
+            label="Login"
+            placeholder="Ex: 123456"
         >
         </app-primary-input>
 
@@ -25,5 +43,7 @@
         >
         </app-primary-input>
         
+        <app-button-blue-click>Cadastrar</app-button-blue-click>
     </form>
-</app-default-login-layout>
+
+</app-default-layout>

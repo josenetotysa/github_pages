@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
+import { ButtonBlueClickComponent } from '../../components/button-blue-click/button-blue-click.component';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     DefaultLoginLayoutComponent,
     ReactiveFormsModule,
-    PrimaryInputComponent
+    PrimaryInputComponent,
+    ButtonBlueClickComponent
   ],
   providers:[
     LoginService

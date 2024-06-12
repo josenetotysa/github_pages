@@ -1,12 +1,8 @@
 <div class="content">
-    <app-header-layout></app-header-layout>
+    <app-header-layout style="--justify-content: center;"></app-header-layout>
     
     <main>
         <ng-content></ng-content>
-        <button 
-        (click)="submit()"
-        [disabled]="disablePrimaryBtn"
-        >{{primaryBtnText}}</button>
     </main>
     <app-footer-layout></app-footer-layout>
 </div>

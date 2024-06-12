@@ -2,24 +2,22 @@ import { Component } from '@angular/core';
 import { DefaultLayoutComponent } from '../../components/default-layout/default-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonBlueClickComponent } from '../../components/button-blue-click/button-blue-click.component';
-import { TitlesComponent } from '../../components/titles/titles.component';
 import { ToastrService } from 'ngx-toastr';
+import { TitlesComponent } from '../../components/titles/titles.component';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-list-users',
   standalone: true,
   imports: [
     DefaultLayoutComponent,
     PrimaryInputComponent,
     ReactiveFormsModule,
-    ButtonBlueClickComponent,
     TitlesComponent
   ],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  templateUrl: './list-users.component.html',
+  styleUrl: './list-users.component.scss'
 })
-export class SignupComponent {
+export class ListUsersComponent {
   loginForm!: FormGroup;
 
 

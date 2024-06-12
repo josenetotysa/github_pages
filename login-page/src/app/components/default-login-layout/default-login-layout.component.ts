@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderLayoutComponent } from '../header-layout/header-layout.component';
 import { FooterLayoutComponent } from '../footer-layout/footer-layout.component';
+import { ButtonBlueClickComponent } from '../button-blue-click/button-blue-click.component';
 
 @Component({
   selector: 'app-default-login-layout',
   standalone: true,
   imports: [
     HeaderLayoutComponent,
-    FooterLayoutComponent
+    FooterLayoutComponent,
+    ButtonBlueClickComponent
   ],
   templateUrl: './default-login-layout.component.html',
   styleUrl: './default-login-layout.component.scss'
@@ -27,4 +29,8 @@ export class DefaultLoginLayoutComponent {
 
     this.onNavigate.emit();
   }
+
+  functioncall(e: MouseEvent) {
+    
+   }
 }
