@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.component';
 import { OperadorasComponent } from './pages/operadoras/operadoras.component';
+import { MenuDropdownComponent } from './components/menu-dropdown/menu-dropdown.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +40,10 @@ export const routes: Routes = [
         component: OperadorasComponent
     },
 
+    {
+        path: 'menudrop', component: MenuDropdownComponent
+    },
+
     { 
         path: '', redirectTo: '/login', pathMatch: 'full' 
     },
@@ -46,6 +51,7 @@ export const routes: Routes = [
     {
         path: '**', component: Error404Component
     }
+    
 
 ];
 

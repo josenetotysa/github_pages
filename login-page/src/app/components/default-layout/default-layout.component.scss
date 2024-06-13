@@ -1,6 +1,28 @@
 @import "../../../styles/variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
+// ::ng-deep .menu-primary .mat-mdc-menu-content,
+// ::ng-deep .menu-primary .mat-mdc-menu-content .mat-mdc-menu-item .mdc-list-item_primary-text {
+// font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; // change font-family
+// font-size: var(--mdc-typography-body1-font-size, 20px); // change font-size
+// line-height: var(--mdc-typography-bodyl-line-height, 24px); // change line height
+// font-weight: var(--mdc-typography-body1-font-weight, 400); // change font weight
+// letter-spacing: var(--mdc-typography-body1-letter-spacing, 0.03125em); // change letter spacing
+// text-decoration: var(--mdc-typography-bodyl-text-decoration, inherit); // change text decoration
+// text-transform: var(--mdc-typography-body1-text-transform, none); // change text transform
+// }
+
+:host ::ng-deep {
+    .mat-mdc-button, .mdc-button__label{
+        font-family: "Arvo"; 
+    }
+
+    .mat-mdc-menu-content, .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text{
+        font-size: 30px !important;
+    }
+}
+
 .content{
 
     display: flex;
@@ -21,11 +43,7 @@
             gap: 20px;
 
         }
-        // nav{
-        //     button{
-        //         font-family: "Arvo";
-        //     }
-        // }
+
     }
 
     main{
