@@ -9,43 +9,43 @@ import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.comp
 import { OperadorasComponent } from './pages/operadoras/operadoras.component';
 
 export const routes: Routes = [
-    {
-        path: "login",
-        component: LoginComponent
-    },
+    // {
+    //     path: "login",
+    //     component: LoginComponent
+    // },
 
-    {
-        path: "signup",
-        component: SignupComponent
-    },
+    // {
+    //     path: "signup",
+    //     component: SignupComponent
+    // },
 
     {
         path: "home",
         component: HomeComponent
     },
 
-    {
-        path: "listUsers",
-        component: ListUsersComponent
-    },
+    // {
+    //     path: "listUsers",
+    //     component: ListUsersComponent
+    // },
 
-    {
-        path: "portabilidade",
-        component: PortabilidadeComponent
-    },
+    // {
+    //     path: "portabilidade",
+    //     component: PortabilidadeComponent
+    // },
 
-    {
-        path: "operadoras",
-        component: OperadorasComponent
-    },
+    // {
+    //     path: "operadoras",
+    //     component: OperadorasComponent
+    // },
 
-    {
-        path: '', redirectTo: '/login', pathMatch: 'full'
-    },
+    // {
+    //     path: '', redirectTo: '/login', pathMatch: 'full'
+    // },
 
-    {
-        path: '**', component: Error404Component
-    }
+    // {
+    //     path: '**', component: Error404Component
+    // }
 
 
 ];
