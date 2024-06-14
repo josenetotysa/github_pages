@@ -10,8 +10,8 @@ describe('FooterLayoutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [FooterLayoutComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(FooterLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

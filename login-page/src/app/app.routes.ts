@@ -41,23 +41,19 @@ export const routes: Routes = [
     },
 
     {
-        path: 'menudrop', component: MenuDropdownComponent
-    },
-
-    { 
-        path: '', redirectTo: '/login', pathMatch: 'full' 
+        path: '', redirectTo: '/login', pathMatch: 'full'
     },
 
     {
         path: '**', component: Error404Component
     }
-    
+
 
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
-  })
+})
 
-  export class AppRoutingModule { }
+export class AppRoutingModule { }

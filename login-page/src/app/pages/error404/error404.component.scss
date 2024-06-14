@@ -1,24 +1,26 @@
-.content{
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    img{
+    img {
         padding-top: 20px;
     }
 
-    h2{
+    h2 {
         padding-bottom: 15px;
     }
-    li{
+
+    li {
         list-style-type: none;
         padding-bottom: 5px;
     }
 
-    a{
+    a {
         color: blue;
-        &:visited{
+
+        &:visited {
             color: blue;
         }
     }

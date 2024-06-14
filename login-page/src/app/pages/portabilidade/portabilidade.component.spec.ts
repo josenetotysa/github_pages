@@ -10,8 +10,8 @@ describe('PortabilidadeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PortabilidadeComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PortabilidadeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

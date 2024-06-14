@@ -6,7 +6,7 @@ import { DefaultLayoutComponent } from '../../components/default-layout/default-
   standalone: true,
   imports: [
     DefaultLayoutComponent
-    ],
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

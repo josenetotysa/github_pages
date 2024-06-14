@@ -10,8 +10,8 @@ describe('PrimaryInputComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PrimaryInputComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PrimaryInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

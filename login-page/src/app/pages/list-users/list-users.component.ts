@@ -23,13 +23,13 @@ export class ListUsersComponent {
 
   constructor(
     // private loginService: LoginService,
-     private toastService: ToastrService
-  ){
+    private toastService: ToastrService
+  ) {
     this.loginForm = new FormGroup({
-      name: new FormControl('',[Validators.required, Validators.minLength(3)]),
-      email: new FormControl('',[Validators.required, Validators.email]),
-      login: new FormControl('',[Validators.required, Validators.minLength(6)]),
-      password: new FormControl('',[Validators.required, Validators.minLength(6)])
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      login: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
@@ -38,6 +38,6 @@ export class ListUsersComponent {
   //     next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
   //     error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
   //   })
-    
+
   // }
 }

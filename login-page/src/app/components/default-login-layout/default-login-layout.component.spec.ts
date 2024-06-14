@@ -10,8 +10,8 @@ describe('DefaultLoginLayoutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DefaultLoginLayoutComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(DefaultLoginLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

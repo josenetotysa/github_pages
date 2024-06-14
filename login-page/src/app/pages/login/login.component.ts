@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
     PrimaryInputComponent,
     ButtonBlueClickComponent
   ],
-  providers:[
+  providers: [
     LoginService
   ],
   templateUrl: './login.component.html',
@@ -27,20 +27,20 @@ export class LoginComponent {
   constructor(
     private loginService: LoginService,
     private toastService: ToastrService
-  ){
+  ) {
     this.loginForm = new FormGroup({
 
-      login: new FormControl('',[Validators.required, Validators.minLength(6)]),
-      password: new FormControl('',[Validators.required, Validators.minLength(6)])
+      login: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
-  submit(){
+  submit() {
     this.loginService.login(this.loginForm.value.login, this.loginForm.value.password).subscribe({
       next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
       error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
     })
-    
+
   }
 
 }

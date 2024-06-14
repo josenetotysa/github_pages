@@ -1,22 +1,22 @@
 <ul>
-    <li><a href="/home">Home</a></li>
-    <li>
-        <a href="#">Usuário v</a>
+    <li class="menu"><a [routerLink]="['/home']" class="menu-title">Home</a></li>
+    <li class="menu">
+        <a class="menu-title">Usuário<img src="/assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
         <ul class="dropdown">
-            <li><a href="#">Cadastrar novo</a></li>
-            <li><a href="#">Listar</a></li>
+            <li><a [routerLink]="['/signup']">Cadastrar novo</a></li>
+            <li><a [routerLink]="['/listUsers']">Listar</a></li>
         </ul>
     </li>
-    <li>
-        <a href="#">Portabilidade v</a>
+    <li class="menu">
+        <a class="menu-title">Portabilidade<img src="/assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
         <ul class="dropdown">
-            <li><a href="#">Listar</a></li>
+            <li><a [routerLink]="['/portabilidade']">Listar</a></li>
         </ul>
     </li>
-    <li>
-        <a href="#">Operadoras v</a>
+    <li class="menu">
+        <a class="menu-title">Operadoras<img src="/assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
         <ul class="dropdown">
-            <li><a href="#">Listar</a></li>
+            <li><a [routerLink]="['/operadoras']">Listar</a></li>
         </ul>
     </li>
 

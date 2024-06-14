@@ -10,8 +10,8 @@ describe('ButtonBlueClickComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ButtonBlueClickComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ButtonBlueClickComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

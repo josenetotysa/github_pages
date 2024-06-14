@@ -1,6 +1,6 @@
 @import "../../../styles/variables.scss";
 
-form{
+form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@ form{
     margin-bottom: 50px;
 }
 
-span{
+span {
     font-size: 20px;
     text-decoration: underline;
     color: $text-fontNormal-color;

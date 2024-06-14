@@ -12,6 +12,6 @@ export class ButtonBlueClickComponent {
   @Output() onClick = new EventEmitter<any>();
 
   onClickButton(event: any) {
-      this.onClick.emit(event);
+    this.onClick.emit(event);
   }
 }

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderLayoutComponent } from '../header-layout/header-layout.component';
 import { FooterLayoutComponent } from '../footer-layout/footer-layout.component';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import { RouterModule } from '@angular/router'; // Importar RouterModule
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { MenuDropdownComponent } from '../menu-dropdown/menu-dropdown.component';
 
 
 @Component({
@@ -12,9 +13,10 @@ import { RouterModule } from '@angular/router'; // Importar RouterModule
   imports: [
     HeaderLayoutComponent,
     FooterLayoutComponent,
-    MatButtonModule, 
+    MatButtonModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
+    MenuDropdownComponent
   ],
   templateUrl: './default-layout.component.html',
   styleUrl: './default-layout.component.scss'
@@ -26,11 +28,11 @@ export class DefaultLayoutComponent {
 
 
   @Output("navigate") onNavigate = new EventEmitter();
-  submit(){
+  submit() {
     this.onSubmit.emit();
   }
 
-  navigate(){
+  navigate() {
 
     this.onNavigate.emit();
   }

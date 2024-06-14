@@ -1,28 +1,10 @@
 <div class="content">
     <app-header-layout style="--justify-content: space-between;">
         <nav class="menu">
-
-            <button mat-button [routerLink]="['/home']">Home</button>
-    
-            <button mat-button [matMenuTriggerFor]="userMenu">Usuários</button>
-            <mat-menu #userMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/listUsers']">Listar Usuários</button>
-            <button mat-menu-item [routerLink]="['/signup']">Cadastrar Novo</button>
-            </mat-menu>
-
-            <button mat-button [matMenuTriggerFor]="portMenu">Portabilidade</button>
-            <mat-menu #portMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/portabilidade']">Listar Portabilidade</button>
-            </mat-menu>
-
-            <button mat-button [matMenuTriggerFor]="operMenu">Operadoras</button>
-            <mat-menu #operMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/operadoras']">Listar Operadoras</button>
-            </mat-menu>
-
+            <app-menu-dropdown></app-menu-dropdown>
         </nav>
     </app-header-layout>
-    
+
     <main>
         <ng-content></ng-content>
     </main>

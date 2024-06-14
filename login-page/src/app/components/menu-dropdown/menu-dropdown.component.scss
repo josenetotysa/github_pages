@@ -1,40 +1,74 @@
-ul{
+@import "../../../styles/variables.scss";
+
+ul {
     list-style: none;
-    background-color: #22438c;
+
 }
 
-ul li{
-  display: inline-block;
-  position: relative;  
+ul li {
+    display: inline-block;
+    position: relative;
 }
-
 
 ul li a {
     display: block;
-    padding: 20px 25px;
-    color: #fff;
+    padding: 10px 20px;
+    color: #212121;
     text-decoration: none;
     text-align: left;
-    font-size: 20px;
+    font-size: 16px;
 }
 
-ul li ul.dropdown li{
+ul li ul.dropdown li {
     display: block;
 }
 
-ul li ul.dropdown{
-    width: 120%;
-    background-color: #22438c;
+ul li ul.dropdown {
+    background-color: #fff;
+    width: 100%;
     position: absolute;
     z-index: 999;
     display: none;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 3px 5px#00000050;
 }
 
-
-ul li a:hover{
-    background: #112c66;
+ul li a:hover {
+    background-color: #dcdcdc;
 }
 
-ul li:hover ul.dropdown{ 
+ul li:hover ul.dropdown {
     display: block;
-} 
+}
+
+img {
+    vertical-align: middle;
+    margin-left: 10px;
+    transition-duration: 0.6s;
+    transform-origin: center;
+    width: 16px;
+    height: auto;
+}
+
+ul li:hover>a img {
+    transform: rotate(180deg);
+}
+
+.menu-title {
+    font-weight: 500;
+}
+
+.menu>a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #212121;
+    transition: width 0.6s ease-in-out;
+}
+
+.menu:hover>a::after {
+    width: 100%;
+}

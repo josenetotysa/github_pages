@@ -21,16 +21,16 @@ export class DefaultLoginLayoutComponent {
 
 
   @Output("navigate") onNavigate = new EventEmitter();
-  submit(){
+  submit() {
     this.onSubmit.emit();
   }
 
-  navigate(){
+  navigate() {
 
     this.onNavigate.emit();
   }
 
   functioncall(e: MouseEvent) {
-    
-   }
+
+  }
 }

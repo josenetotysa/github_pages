@@ -1,21 +1,23 @@
 @import "../../../styles/variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-.input-wrapper{
+.input-wrapper {
 
     color: $text-fontNormal-color;
-    
+
     text-align: start;
 
-    label{
+    label {
         margin-bottom: 10px;
-        font-family: "Arvo", serif;
+        font-family: $font-primary;
         font-size: 20px;
     }
-    .input-content{
+
+    .input-content {
         width: 100%;
         border-radius: 4px;
-        input{
+
+        input {
             background-color: #ffffff;
             border: 1px solid #7A7A7A;
             border-radius: 4px;

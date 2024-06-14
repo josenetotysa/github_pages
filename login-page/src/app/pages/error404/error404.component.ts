@@ -6,6 +6,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './error404.component.html',
-  styleUrls: ['./error404.component.scss']  
+  styleUrls: ['./error404.component.scss']
 })
 export class Error404Component { }

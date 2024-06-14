@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+// ========================= Fonts =========================
+$font-primary: 'Arvo', serif;
+$font-secondary: 'Montserrat', sans-serif;
+
+// ========================= Colors =========================
+
 $text-fontNormal-color: #212121;
 $text-fontLight-color: #585858;
 $border-color: #7a7a7a;
 $dropdown-menu-color: #dcdcdc;
-$primary-color: #1B5996 ;
+$primary-color: #1B5996;
 $second-color: #326aa1;
 $bg-color: #F9F9F9;
 $footer-color: #D9D9D9;

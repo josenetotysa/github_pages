@@ -11,8 +11,8 @@ type InputTypes = "text" | "password" | "email"
   imports: [
     ReactiveFormsModule,
     CommonModule
-    ],
-  providers:[
+  ],
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PrimaryInputComponent),
@@ -29,10 +29,10 @@ export class PrimaryInputComponent implements ControlValueAccessor {
   @Input() inputName: string = "";
 
   value: string = ''
-  onChange: any = () => {}
-  onTouched: any = () => {}
+  onChange: any = () => { }
+  onTouched: any = () => { }
 
-  onInput(event: Event){
+  onInput(event: Event) {
     const value = (event.target as HTMLInputElement).value
     this.onChange(value)
   }
@@ -48,5 +48,5 @@ export class PrimaryInputComponent implements ControlValueAccessor {
     this.onTouched = fn
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void { }
 }
