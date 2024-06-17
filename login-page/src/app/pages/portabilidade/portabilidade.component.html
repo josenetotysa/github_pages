@@ -4,9 +4,9 @@
         <div class="container-all">
                 <div class="container-filter">
         
-                    <mat-form-field *ngIf="filtroDddVisivel">
-                        <mat-label>Filtrar por DDD</mat-label>
-                        <input matInput (keyup)="applyFilter('ddd', $event)" placeholder="DDD">
+                    <mat-form-field *ngIf="filtroCnVisivel">
+                        <mat-label>Filtrar por CN</mat-label>
+                        <input matInput (keyup)="applyFilter('cn', $event)" placeholder="CN">
                       </mat-form-field>
                       
                       <mat-form-field *ngIf="filtroPrefixoVisivel">
@@ -18,11 +18,23 @@
                         <mat-label>Filtrar por Sufixo</mat-label>
                         <input matInput (keyup)="applyFilter('sufixo', $event)" placeholder="Sufixo">
                       </mat-form-field>
+
+                      <mat-form-field *ngIf="filtroPrefixoTVisivel">
+                        <mat-label>Filtrar por Prefixo</mat-label>
+                        <input matInput (keyup)="applyFilter('prefixoT', $event)" placeholder="PrefixoT">
+                      </mat-form-field>
+                      
+                      <mat-form-field *ngIf="filtroSufixoTVisivel">
+                        <mat-label>Filtrar por Sufixo</mat-label>
+                        <input matInput (keyup)="applyFilter('sufixoT', $event)" placeholder="SufixoT">
+                      </mat-form-field>
                     
                       <div class="buttonConfig">
-                          <button class="custom-button" mat-button (click)="toggleFiltro('ddd')">DDD</button>
+                          <button class="custom-button" mat-button (click)="toggleFiltro('cn')">CN</button>
                           <button class="custom-button" mat-button (click)="toggleFiltro('prefixo')">Prefixo</button>
                           <button class="custom-button" mat-button (click)="toggleFiltro('sufixo')">Sufixo</button>
+                          <button class="custom-button" mat-button (click)="toggleFiltro('prefixoT')">PrefixoT</button>
+                          <button class="custom-button" mat-button (click)="toggleFiltro('sufixoT')">SufixoT</button>
                       </div>
                 </div>
                 <div class="container-table">
@@ -30,9 +42,9 @@
         
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         
-                        <ng-container matColumnDef="ddd">
-                            <th mat-header-cell *matHeaderCellDef class="center"> DDD </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.ddd}} </td>
+                        <ng-container matColumnDef="cn">
+                            <th mat-header-cell *matHeaderCellDef class="center"> CN </th>
+                            <td mat-cell *matCellDef="let element" class="center"> {{element.cn}} </td>
                         </ng-container>
         
                         <ng-container matColumnDef="prefixo">
@@ -43,6 +55,16 @@
                         <ng-container matColumnDef="sufixo">
                             <th mat-header-cell *matHeaderCellDef class="center"> Sufixo </th>
                             <td mat-cell *matCellDef="let element" class="center"> {{element.sufixo}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="prefixoT">
+                            <th mat-header-cell *matHeaderCellDef class="center"> PrefixoT </th>
+                            <td mat-cell *matCellDef="let element" class="center"> {{element.prefixoT}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="sufixoT">
+                            <th mat-header-cell *matHeaderCellDef class="center"> SufixoT </th>
+                            <td mat-cell *matCellDef="let element" class="center"> {{element.sufixoT}} </td>
                         </ng-container>
         
                         <ng-container matColumnDef="editar">
@@ -56,7 +78,7 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         
                         <tr class="mat-row" *matNoDataRow>
-                            <td class="mat-cell" colspan="4">Nada Encontrado "{{dataSource.filter}}"</td>
+                            <td class="mat-cell" colspan="6">Nada Encontrado "{{dataSource.filter}}"</td>
                         </tr>
                     </table>
                     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons

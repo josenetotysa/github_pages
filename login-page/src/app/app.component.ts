@@ -5,6 +5,7 @@ import { FooterLayoutComponent } from './components/footer-layout/footer-layout.
 import { HeaderLayoutComponent } from './components/header-layout/header-layout.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

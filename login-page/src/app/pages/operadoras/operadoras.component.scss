@@ -1,6 +1,8 @@
 :host ::ng-deep {
     padding: 20px;
     flex: 1;
+    display: flex;
+    align-items: center;
     .mat-icon {
         color: #1b5996;
         cursor: pointer;
@@ -44,9 +46,10 @@ app-titles{
 .custom-button {
     background-color: #1b5996;
     color: white;
-    padding: 5px 10px;
+    padding: 8px 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    outline: none;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;

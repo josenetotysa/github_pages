@@ -1,19 +1,9 @@
 @import "../../../styles/variables.scss";
 
-// :host{
-//     flex: 1;
-//     width: 100%;
-//     padding-top: 20px;
-// }
-
-// section{
-//     text-align: center;
-// }
-
-
-
 :host ::ng-deep {
     flex: 1;
+    display: flex;
+    align-items: center;
     padding: 20px 0px;
     .mat-icon {
         color: #1b5996;
@@ -24,10 +14,21 @@
         font-weight: 600;
 
     }
+    .mat-mdc-form-field{
+       width:  42%;
+    }
+    .mat-mdc-paginator-container{
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
 }
 
 app-titles{
     text-align: center;
+}
+
+section{
+    width: 600px;
 }
 
 .container-all{
@@ -44,28 +45,4 @@ app-titles{
 
 .center {
     text-align: center;
-}
-
-
-.buttonConfig {
-    width: 50%;
-    display: flex;
-    justify-content: end;
-    gap: 10px;
-
-}
-
-.custom-button {
-    background-color: #1b5996;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.custom-button:hover {
-    background-color: #2382bd;
 }

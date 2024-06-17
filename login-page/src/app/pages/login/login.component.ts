@@ -17,30 +17,31 @@ import { ToastrService } from 'ngx-toastr';
     AuthService
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent {
   
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
 
   constructor(
     private authService: AuthService,
     private toastService: ToastrService
   ) {
     this.loginForm = new FormGroup({
-
       login: new FormControl('', [Validators.required, Validators.minLength(6)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
-    })
+    });
   }
 
   submit() {
-    this.authService.authenticate(this.loginForm.value.login, this.loginForm.value.password).subscribe({
-      next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
-      error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
-    })
-
+    if (this.loginForm.valid) {
+      this.authService.authenticate(this.loginForm.value.login, this.loginForm.value.password).subscribe({
+        next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
+        error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
+      });
+    } else {
+      this.toastService.error('Formulário inválido', 'Por favor, preencha todos os campos corretamente.');
+    }
   }
-
 }

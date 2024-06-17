@@ -17,10 +17,9 @@ import { AuthService } from '../../services/auth.service';
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
-})
-export class SignupComponent {
+})export class SignupComponent {
 
-  signupForm!: FormGroup;
+  signupForm: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -31,14 +30,22 @@ export class SignupComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       login: new FormControl('', [Validators.required, Validators.minLength(6)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
-    })
+    });
   }
 
-  submit(){
-    this.authService.signup(this.signupForm.value.name, this.signupForm.value.email,this.signupForm.value.login, this.signupForm.value.password).subscribe({
-      next: () => this.toastService.success("Cadastro realizado com sucesso!"),
-      error: () => this.toastService.error("Ops! Houve um erro ao tentar realizar o cadastro. Por favor, tente novamente mais tarde.")
-    })
-
+  submit() {
+    if (this.signupForm.valid) {
+      this.authService.signup(
+        this.signupForm.value.name,
+        this.signupForm.value.email,
+        this.signupForm.value.login,
+        this.signupForm.value.password
+      ).subscribe({
+        next: () => this.toastService.success('Usuário Cadastrado!', 'Cadastro realizado com sucesso!'),
+        error: () => this.toastService.error('Ops! Algo deu errado.', 'Erro ao tentar realizar o cadastro. Por favor, tente novamente mais tarde.')
+      });
+    } else {
+      this.toastService.error('Formulário inválido', 'Por favor, preencha todos os campos corretamente.');
+    }
   }
 }

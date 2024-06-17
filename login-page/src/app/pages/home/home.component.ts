@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,29 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
-
-  logout(): void {
-    // Chama o método logout do AuthService
-    this.authService.logout();
-    // Aqui você pode redirecionar para a página de login ou para qualquer outra rota desejada
+  userLogin: string = "";
+  constructor(private authService: AuthService, private router: Router) {
   }
 
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      const userLogin = sessionStorage.getItem("login");
+      console.log(`se liga ${userLogin}`);
+      if (userLogin) {
+        this.userLogin = userLogin;
+      } else {
+        console.warn("Nenhum login encontrado no localStorage");
+      }
+    } else {
+      console.warn("Usuário não autenticado");
+    }
+  }
+
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']); 
+  }
 }
