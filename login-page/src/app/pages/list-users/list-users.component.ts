@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DefaultLayoutComponent } from '../../components/default-layout/default-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +8,6 @@ import { TitlesComponent } from '../../components/titles/titles.component';
   selector: 'app-list-users',
   standalone: true,
   imports: [
-    DefaultLayoutComponent,
     PrimaryInputComponent,
     ReactiveFormsModule,
     TitlesComponent

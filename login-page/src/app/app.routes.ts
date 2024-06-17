@@ -7,45 +7,54 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.component';
 import { OperadorasComponent } from './pages/operadoras/operadoras.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { NotAuthguardService } from './services/not-authguard.service';
 
 export const routes: Routes = [
-    // {
-    //     path: "login",
-    //     component: LoginComponent
-    // },
+    {
+        path: "login",
+        component: LoginComponent,
+        canActivate: [NotAuthguardService]
+    
+    },
 
-    // {
-    //     path: "signup",
-    //     component: SignupComponent
-    // },
+    {
+        path: "signup",
+        component: SignupComponent,
+        canActivate: [AuthGuard]
+    },
 
     {
         path: "home",
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard]
     },
 
-    // {
-    //     path: "listUsers",
-    //     component: ListUsersComponent
-    // },
+    {
+        path: "listUsers",
+        component: ListUsersComponent,
+        canActivate: [AuthGuard]
+    },
 
-    // {
-    //     path: "portabilidade",
-    //     component: PortabilidadeComponent
-    // },
+    {
+        path: "portabilidade",
+        component: PortabilidadeComponent,
+        canActivate: [AuthGuard]
+    },
 
-    // {
-    //     path: "operadoras",
-    //     component: OperadorasComponent
-    // },
+    {
+        path: "operadoras",
+        component: OperadorasComponent,
+        canActivate: [AuthGuard]
+    },
 
-    // {
-    //     path: '', redirectTo: '/login', pathMatch: 'full'
-    // },
+    {
+        path: '', redirectTo: '/login', pathMatch: 'full'
+    },
 
-    // {
-    //     path: '**', component: Error404Component
-    // }
+    {
+        path: '**', component: Error404Component
+    }
 
 
 ];

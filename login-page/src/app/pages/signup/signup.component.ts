@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { DefaultLayoutComponent } from '../../components/default-layout/default-layout.component';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonBlueClickComponent } from '../../components/button-blue-click/button-blue-click.component';
 import { TitlesComponent } from '../../components/titles/titles.component';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
   imports: [
-    DefaultLayoutComponent,
     PrimaryInputComponent,
     ReactiveFormsModule,
     ButtonBlueClickComponent,
@@ -20,14 +19,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-  loginForm!: FormGroup;
 
+  signupForm!: FormGroup;
 
   constructor(
-    // private loginService: LoginService,
+    private authService: AuthService,
     private toastService: ToastrService
   ) {
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       login: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -35,11 +34,11 @@ export class SignupComponent {
     })
   }
 
-  // submit(){
-  //   this.loginService.login(this.loginForm.value.login, this.loginForm.value.password).subscribe({
-  //     next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
-  //     error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
-  //   })
+  submit(){
+    this.authService.signup(this.signupForm.value.name, this.signupForm.value.email,this.signupForm.value.login, this.signupForm.value.password).subscribe({
+      next: () => this.toastService.success("Cadastro realizado com sucesso!"),
+      error: () => this.toastService.error("Ops! Houve um erro ao tentar realizar o cadastro. Por favor, tente novamente mais tarde.")
+    })
 
-  // }
+  }
 }

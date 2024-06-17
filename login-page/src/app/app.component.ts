@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FooterLayoutComponent } from './components/footer-layout/footer-layout.component';
 import { HeaderLayoutComponent } from './components/header-layout/header-layout.component';
-import { HomeComponent } from './pages/home/home.component';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +11,11 @@ import { HomeComponent } from './pages/home/home.component';
     CommonModule,
      RouterOutlet,
      FooterLayoutComponent,
-     HeaderLayoutComponent,
-     HomeComponent
+     HeaderLayoutComponent
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'login-page';
+export class AppComponent{
+  title = 'ASCAPP';
 }

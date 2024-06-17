@@ -1,5 +1,11 @@
 @import "../../../styles/variables.scss";
 
+:host{
+    flex: 1;
+    padding-top: 20px;
+}
+
+
 form {
     width: 100%;
     display: flex;

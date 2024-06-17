@@ -1,31 +1,31 @@
 import { Component } from '@angular/core';
-import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { ButtonBlueClickComponent } from '../../components/button-blue-click/button-blue-click.component';
-import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    DefaultLoginLayoutComponent,
     ReactiveFormsModule,
     PrimaryInputComponent,
     ButtonBlueClickComponent
   ],
   providers: [
-    LoginService
+    AuthService
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
 export class LoginComponent {
+  
   loginForm!: FormGroup;
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private toastService: ToastrService
   ) {
     this.loginForm = new FormGroup({
@@ -36,7 +36,7 @@ export class LoginComponent {
   }
 
   submit() {
-    this.loginService.login(this.loginForm.value.login, this.loginForm.value.password).subscribe({
+    this.authService.authenticate(this.loginForm.value.login, this.loginForm.value.password).subscribe({
       next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
       error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
     })
