@@ -1,3 +1,79 @@
 <section>
     <app-titles>Routing Numbers</app-titles>
+
+    <div class="container-all">
+        <div class="container-filter">
+
+
+            <mat-form-field *ngIf="filtroRn1">
+                <mat-label>Filtrar por RN1</mat-label>
+                <input matInput (keyup)="applyFilter('rn1', $event)" placeholder="RN1">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="filtroOperadora">
+                <mat-label>Filtrar por Operadora</mat-label>
+                <input matInput (keyup)="applyFilter('operadora', $event)" placeholder="Operadora">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="filtroRn2">
+                <mat-label>Filtrar por RN2</mat-label>
+                <input matInput (keyup)="applyFilter('rn2', $event)" placeholder="RN2">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="filtroRel">
+                <mat-label>Filtrar por Rel</mat-label>
+                <input matInput (keyup)="applyFilter('rel', $event)" placeholder="Rel">
+            </mat-form-field>
+
+            <div class="buttonConfig">
+                <button class="custom-button" mat-button (click)="toggleFiltro('rn1')">RN1</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('operadora')">Operadora</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('rn2')">RN2</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('rel')">Rel</button>
+            </div>
+
+        </div>
+        <div class="container-table">
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="rn1">
+                    <th mat-header-cell *matHeaderCellDef class="center"> RN1 </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.rn1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="operadora">
+                    <th mat-header-cell *matHeaderCellDef class="center"> Operadora </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.operadora}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="rn2">
+                    <th mat-header-cell *matHeaderCellDef class="center"> RN2 </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.rn2}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="rel">
+                    <th mat-header-cell *matHeaderCellDef class="center"> Rel </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.rel}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef class="center"> Editar </th>
+                    <td mat-cell *matCellDef="let element" class="center">
+                        <mat-icon (click)="openDialog(element)">edit</mat-icon>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">Nada Encontrado "{{dataSource.filter}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
 </section>

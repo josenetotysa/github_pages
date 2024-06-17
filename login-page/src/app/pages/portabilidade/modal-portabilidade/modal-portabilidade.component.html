@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Editar Item</h1>
+<div mat-dialog-content class="container-all">
+  <mat-form-field>
+    <mat-label>DDD</mat-label>
+    <input matInput [(ngModel)]="data.ddd">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Prefixo</mat-label>
+    <input matInput [(ngModel)]="data.prefixo">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Sufixo</mat-label>
+    <input matInput [(ngModel)]="data.sufixo">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
+  <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
+</div>

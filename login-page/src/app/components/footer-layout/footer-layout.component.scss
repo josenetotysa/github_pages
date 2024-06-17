@@ -5,13 +5,15 @@ footer {
     width: 100%;
     text-align: center;
     font-size: 12px;
-    padding: 10px 0 18px 0;
+    padding: 10px 0 15px 0;
 
     .date-hour{
         font-size: 14px;
         color: #212121;
     }
-
+    p{
+        margin: 0;
+    }
     span{
         color: #585858;
     }

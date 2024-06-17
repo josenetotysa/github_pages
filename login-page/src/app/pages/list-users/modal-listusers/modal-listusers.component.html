@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Editar Item</h1>
+<div mat-dialog-content class="container-all">
+    <div class="left">
+
+        <mat-form-field>
+            <mat-label>ID</mat-label>
+            <input matInput [(ngModel)]="data.id">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="data.name">
+        </mat-form-field>
+    </div>
+    <div class="right">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="data.email">
+        </mat-form-field>
+    
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
+    <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
+</div>

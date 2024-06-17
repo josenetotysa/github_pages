@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FooterLayoutComponent } from './components/footer-layout/footer-layout.component';
 import { HeaderLayoutComponent } from './components/header-layout/header-layout.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { HeaderLayoutComponent } from './components/header-layout/header-layout.
     CommonModule,
      RouterOutlet,
      FooterLayoutComponent,
-     HeaderLayoutComponent
+     HeaderLayoutComponent,
+     MatSlideToggleModule
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
