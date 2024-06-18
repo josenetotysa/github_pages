@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../types/login-response.type';
 import { BehaviorSubject, tap } from 'rxjs';
@@ -20,8 +20,9 @@ export class AuthService {
     return this.httpClient.post<LoginResponse>(`${this.apiUrl}/login`, { login, password }).pipe(
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token); 
-        sessionStorage.setItem("login", value.login); 
+        sessionStorage.setItem("username", value.name); 
         this.router.navigate(['/home']); 
+        this.loggedIn.next(true);
       })
     );
   }
@@ -30,15 +31,15 @@ export class AuthService {
     return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { name, email, login, password }).pipe(
       tap((value) => {
         sessionStorage.setItem("auth-token", value.token)
-        sessionStorage.setItem("username", value.name) 
       })
     );
   }
 
   isAuthenticated(): boolean {
+    // Verificar se o token está presente no sessionStorage
     return !!sessionStorage.getItem('auth-token');
   }
-  
+
   getLoggedInStatus(): BehaviorSubject<boolean> {
     return this.loggedIn;
   }
@@ -50,7 +51,7 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem('auth-token');
-    sessionStorage.removeItem('login');
+    sessionStorage.removeItem('username');
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

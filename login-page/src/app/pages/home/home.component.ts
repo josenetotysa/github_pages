@@ -11,16 +11,16 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  userLogin: string = "";
+  userName: string = "";
   constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      const userLogin = sessionStorage.getItem("login");
-      console.log(`se liga ${userLogin}`);
-      if (userLogin) {
-        this.userLogin = userLogin;
+      const userName = sessionStorage.getItem("username");
+      console.log(`se liga ${userName}`);
+      if (userName) {
+        this.userName = userName;
       } else {
         console.warn("Nenhum login encontrado no localStorage");
       }

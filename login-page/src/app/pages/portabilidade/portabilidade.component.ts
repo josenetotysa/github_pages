@@ -188,7 +188,7 @@ export class PortabilidadeComponent {
 
   private dialog = inject(MatDialog);
   
-  ngAfterViewInit() {
+  ngAfterViewInit() { 
     this.dataSource.paginator = this.paginator;
   }
 
