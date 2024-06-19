@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ListUsersService } from '../../services/list-users.service';
 @Component({
   selector: 'app-menu-dropdown',
   standalone: true,
@@ -12,8 +11,5 @@ import { ListUsersService } from '../../services/list-users.service';
 })
 export class MenuDropdownComponent {
 
-  @ViewChild(ListUsersService) ListUsersService!: ListUsersService;
-  listUsers() {
-    this.ListUsersService.listUsers();
-    }
+  
 }

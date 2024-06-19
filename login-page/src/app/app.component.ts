@@ -5,7 +5,6 @@ import { FooterLayoutComponent } from './components/footer-layout/footer-layout.
 import { HeaderLayoutComponent } from './components/header-layout/header-layout.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from './services/jwt-interceptor.service';
 import { AuthService } from './services/auth.service';
 
 
@@ -13,7 +12,7 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   standalone: true,
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+
   ],
   imports: [
     CommonModule,

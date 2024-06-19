@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonBlueClickComponent } from '../../components/button-blue-click/button-blue-click.component';
 import { TitlesComponent } from '../../components/titles/titles.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-signup',
@@ -13,11 +14,15 @@ import { AuthService } from '../../services/auth.service';
     PrimaryInputComponent,
     ReactiveFormsModule,
     ButtonBlueClickComponent,
-    TitlesComponent
+    TitlesComponent,
+    CommonModule
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
-})export class SignupComponent {
+})
+export class SignupComponent {
+
+
 
   signupForm: FormGroup;
 
@@ -26,10 +31,10 @@ import { AuthService } from '../../services/auth.service';
     private toastService: ToastrService
   ) {
     this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      login: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(150)]),
+      login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
 

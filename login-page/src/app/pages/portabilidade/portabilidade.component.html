@@ -1,96 +1,97 @@
-
 <section>
-        <app-titles>Portabilidade</app-titles>
+    <app-titles>Portabilidade</app-titles>
 
-        <div class="container-all">
-                <div class="container-filter">
-        
-                    <mat-form-field *ngIf="filtroCnVisivel">
-                        <mat-label>Filtrar por CN</mat-label>
-                        <input matInput (keyup)="applyFilter('cn', $event)" placeholder="CN">
-                      </mat-form-field>
-                      
-                      <mat-form-field *ngIf="filtroPrefixoVisivel">
-                        <mat-label>Filtrar por Prefixo</mat-label>
-                        <input matInput (keyup)="applyFilter('prefixo', $event)" placeholder="Prefixo">
-                      </mat-form-field>
-                      
-                      <mat-form-field *ngIf="filtroSufixoVisivel">
-                        <mat-label>Filtrar por Sufixo</mat-label>
-                        <input matInput (keyup)="applyFilter('sufixo', $event)" placeholder="Sufixo">
-                      </mat-form-field>
-                    
-                      <mat-form-field *ngIf="filtroprefixoVVisivel">
-                        <mat-label>Filtrar por Prefixo</mat-label>
-                        <input matInput (keyup)="applyFilter('prefixoV', $event)" placeholder="prefixoV">
-                      </mat-form-field>
-                      
-                      <mat-form-field *ngIf="filtrosufixoVVisivel">
-                        <mat-label>Filtrar por Sufixo</mat-label>
-                        <input matInput (keyup)="applyFilter('sufixoV', $event)" placeholder="sufixoV">
-                      </mat-form-field>
-                    
-                      <div class="buttonConfig">
-                          <button class="custom-button" mat-button (click)="toggleFiltro('cn')">CN</button>
-                          <button class="custom-button" mat-button (click)="toggleFiltro('prefixo')">Prefixo</button>
-                          <button class="custom-button" mat-button (click)="toggleFiltro('sufixo')">Sufixo</button>
-                          <button class="custom-button" mat-button (click)="toggleFiltro('prefixoV')">prefixoV</button>
-                          <button class="custom-button" mat-button (click)="toggleFiltro('sufixoV')">sufixoV</button>
-                      </div>
-                </div>
+    <div class="container-all">
+        <div class="container-filter">
 
-                <div class="container-title">
-                    <div style="width: 45%; text-align: center; border-bottom: 2px solid #1b5996; margin-right: 5px;"><span>Telephone Number(s)</span></div>
-                    <div style="width: 38%; text-align: center; border-bottom: 2px solid #1b5996; margin-left: 5px;"><span>Virtual Number(s)</span></div>
-                    <div style="width: auto;"></div>
-                </div>
-                <div class="container-table">
-                   
-        
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        
-                        <ng-container matColumnDef="cn">
-                            <th mat-header-cell *matHeaderCellDef class="center"> CN </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.cn}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="prefixo">
-                            <th mat-header-cell *matHeaderCellDef class="center"> Prefixo </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.prefixo}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="sufixo">
-                            <th mat-header-cell *matHeaderCellDef class="center"> Sufixo </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.sufixo}} </td>
-                        </ng-container>
+            <mat-form-field *ngIf="filtroCnVisivel">
+                <mat-label>Filtrar por CN</mat-label>
+                <input matInput (keyup)="applyFilter('cn', $event)" placeholder="CN">
+            </mat-form-field>
 
-                        <ng-container matColumnDef="prefixoV">
-                            <th mat-header-cell *matHeaderCellDef class="center"> prefixoV </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.prefixoV}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="sufixoV">
-                            <th mat-header-cell *matHeaderCellDef class="center"> sufixoV </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.sufixoV}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="editar">
-                            <th mat-header-cell *matHeaderCellDef class="center"> Editar </th>
-                            <td mat-cell *matCellDef="let element" class="center">
-                                <mat-icon (click)="openDialog(element)">edit</mat-icon>
-                            </td>
-                        </ng-container>
-        
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        
-                        <tr class="mat-row" *matNoDataRow>
-                            <td class="mat-cell" colspan="6">Nada Encontrado "{{dataSource.filter}}"</td>
-                        </tr>
-                    </table>
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-                        aria-label="Select page of periodic elements">
-                    </mat-paginator>
-                </div>
+            <mat-form-field *ngIf="filtroPrefixoVisivel">
+                <mat-label>Filtrar por Prefixo</mat-label>
+                <input matInput (keyup)="applyFilter('prefixo', $event)" placeholder="Prefixo">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="filtroSufixoVisivel">
+                <mat-label>Filtrar por Sufixo</mat-label>
+                <input matInput (keyup)="applyFilter('sufixo', $event)" placeholder="Sufixo">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="filtroprefixoVVisivel">
+                <mat-label>Filtrar por Prefixo</mat-label>
+                <input matInput (keyup)="applyFilter('prefixoV', $event)" placeholder="prefixoV">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="filtrosufixoVVisivel">
+                <mat-label>Filtrar por Sufixo</mat-label>
+                <input matInput (keyup)="applyFilter('sufixoV', $event)" placeholder="sufixoV">
+            </mat-form-field>
+
+            <div class="buttonConfig">
+                <button class="custom-button" mat-button (click)="toggleFiltro('cn')">CN</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('prefixo')">Prefixo</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('sufixo')">Sufixo</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('prefixoV')">prefixoV</button>
+                <button class="custom-button" mat-button (click)="toggleFiltro('sufixoV')">sufixoV</button>
             </div>
+        </div>
+
+        <div class="container-title">
+            <div style="width: 45%; text-align: center; border-bottom: 2px solid #1b5996; margin-right: 5px;">
+                <span>Telephone Number(s)</span></div>
+            <div style="width: 38%; text-align: center; border-bottom: 2px solid #1b5996; margin-left: 5px;">
+                <span>Virtual Number(s)</span></div>
+            <div style="width: auto;"></div>
+        </div>
+        <div class="container-table">
+
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="cn">
+                    <th mat-header-cell *matHeaderCellDef class="center"> CN </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.cn}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="prefixo">
+                    <th mat-header-cell *matHeaderCellDef class="center"> Prefixo </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.prefixo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sufixo">
+                    <th mat-header-cell *matHeaderCellDef class="center"> Sufixo </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.sufixo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="prefixoV">
+                    <th mat-header-cell *matHeaderCellDef class="center"> prefixoV </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.prefixoV}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sufixoV">
+                    <th mat-header-cell *matHeaderCellDef class="center"> sufixoV </th>
+                    <td mat-cell *matCellDef="let element" class="center"> {{element.sufixoV}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef class="center"> Editar </th>
+                    <td mat-cell *matCellDef="let element" class="center">
+                        <mat-icon (click)="openDialog(element)">edit</mat-icon>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="6">Nada Encontrado "{{dataSource.filter}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
 </section>

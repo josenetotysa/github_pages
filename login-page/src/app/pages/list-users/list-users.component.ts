@@ -14,13 +14,6 @@ import { UserResponse } from '../../types/user-response.type';
 import { ListUsersService } from '../../services/list-users.service';
 
 
-export interface PeriodicElement {
-  login: string;
-  name: string;
-  email: string;
-  password: string;
-}
-
 @Component({
   selector: 'app-list-users',
   standalone: true,
@@ -35,35 +28,26 @@ export interface PeriodicElement {
     MatPaginator,
     MatPaginatorModule,
     MatDialogModule,
-    
-    
   ],
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.scss'
 })
 export class ListUsersComponent {
 
-  loginForm!: FormGroup;
   displayedColumns: string[] = ['login', 'name', 'email', 'password', 'editar'];
-   dataSource = new MatTableDataSource<UserResponse>([]);
+  dataSource = new MatTableDataSource<UserResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
-  constructor(
-    private listUsersService: ListUsersService,
-    // private loginService: LoginService,
-    private toastService: ToastrService,
-    private dialog: MatDialog
-  ) {
-   
+  ngAfterViewInit() { 
+    this.dataSource.paginator = this.paginator;
   }
   
-  list() {
-    // Lógica para listar usuários
-    console.log('Função para listar usuários foi chamada!');
-    // Aqui você pode chamar o método loadUsers() ou qualquer outra ação desejada
-  }
+  constructor(
+    private listUsersService: ListUsersService,
+    private toastService: ToastrService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.loadUsers();
@@ -76,20 +60,40 @@ export class ListUsersComponent {
       },
       (error) => {
         console.error('Erro ao carregar usuários:', error);
-        this.toastService.error('Erro ao carregar usuários', 'Ocorreu um erro ao tentar carregar os usuários. Por favor, tente novamente mais tarde.');
+        this.toastService.error('Erro ao carregar usuários', 'Ocorreu um erro ao tentar carregar os usuários.');
       }
     );
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  
+    // Dividir o filtro em termos individuais
+    const filters = filterValue.split(' ');
+  
+    // Aplicar o filtro customizado
+    this.dataSource.filterPredicate = (data: UserResponse, filter: string) => {
+      const searchString = filter.toLowerCase().trim();
+      let matches = true;
+  
+      // Verificar se algum dos termos do filtro está presente em rn1 ou operadora
+      filters.forEach(term => {
+        if (!(data.login.toLowerCase().includes(term) || data.name.toLowerCase().includes(term) || data.email.toLowerCase().includes(term))) {
+          matches = false;
+        }
+      });
+  
+      return matches;
+    };
+  
+    // Aplicar o filtro
+    this.dataSource.filter = filterValue;
   }
 
   openDialog(element: UserResponse): void {
     const dialogRef = this.dialog.open(ModalListusersComponent, {
       width: '450px',
-      data: { login: element.login, name: element.name, email: element.email }
+      data: { login: element.login, name: element.name, email: element.email, password: element.password }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -97,6 +101,7 @@ export class ListUsersComponent {
         element.login = result.login;
         element.name = result.name;
         element.email = result.email;
+        element.password =  result.password;
       }
     });
   }
