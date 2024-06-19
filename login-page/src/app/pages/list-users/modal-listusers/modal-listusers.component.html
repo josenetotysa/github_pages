@@ -1,25 +1,32 @@
-<h1 mat-dialog-title>Editar Item</h1>
+<div class="container-title">
+    <h1 mat-dialog-title>Editar Item</h1>
+    <button mat-icon-button class="close-button" (click)="onCloseClick()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
 <div mat-dialog-content class="container-all">
-    <div class="left">
-
+    <div class="container-conteudo">
         <mat-form-field>
-            <mat-label>ID</mat-label>
-            <input matInput [(ngModel)]="data.id">
+            <mat-label>Login</mat-label>
+            <input matInput [(ngModel)]="data.login">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Nome</mat-label>
             <input matInput [(ngModel)]="data.name">
         </mat-form-field>
-    </div>
-    <div class="right">
         <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput [(ngModel)]="data.email">
         </mat-form-field>
-    
+
+        <mat-form-field>
+            <mat-label>Senha</mat-label>
+            <input matInput [(ngModel)]="data.password">
+        </mat-form-field>
+
     </div>
 </div>
 <div mat-dialog-actions>
     <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-    <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
+    <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Alterar</button>
 </div>

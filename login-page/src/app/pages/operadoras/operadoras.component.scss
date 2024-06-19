@@ -1,10 +1,11 @@
+@import "../../../styles/variables.scss";
 :host ::ng-deep {
     padding: 20px;
     flex: 1;
     display: flex;
     align-items: center;
     .mat-icon {
-        color: #1b5996;
+        color: $primary-color;
         cursor: pointer;
     }
 
@@ -22,7 +23,8 @@ app-titles{
 }
 
 .container-table {
-    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    box-shadow: 
+        0px 5px 5px -3px rgba(0, 0, 0, 0.2),
         0px 8px 10px 1px rgba(0, 0, 0, 0.14),
         0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 
@@ -44,7 +46,7 @@ app-titles{
 }
 
 .custom-button {
-    background-color: #1b5996;
+    background-color: $primary-color;
     color: white;
     padding: 8px 10px;
     border: none;
@@ -56,5 +58,5 @@ app-titles{
 }
 
 .custom-button:hover {
-    background-color: #2382bd;
+    background-color: $second-color;
 }

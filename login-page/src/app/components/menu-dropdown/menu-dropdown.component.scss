@@ -13,7 +13,7 @@ ul li {
 ul li a {
     display: block;
     padding: 10px 20px;
-    color: #585858;
+    color: $text-fontLight-color;
     text-decoration: none;
     text-align: left;
     font-size: 16px;
@@ -24,7 +24,7 @@ ul li ul.dropdown li {
 }
 
 ul li ul.dropdown {
-    background-color: #fff;
+    background-color: $white-color;
     width: 100%;
     position: absolute;
     z-index: 999;
@@ -34,7 +34,7 @@ ul li ul.dropdown {
 }
 
 ul li a:hover {
-    background-color: #dcdcdc;
+    background-color: $dropdown-menu-color;
 }
 
 ul li:hover ul.dropdown {

@@ -1,19 +1,39 @@
-<h1 mat-dialog-title>Editar Item</h1>
+<div class="container-title">
+  <h1 mat-dialog-title>Editar Item</h1>
+  <button mat-icon-button class="close-button" (click)="onCloseClick()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 <div mat-dialog-content class="container-all">
-  <mat-form-field>
-    <mat-label>CN</mat-label>
-    <input matInput [(ngModel)]="data.cn">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Prefixo</mat-label>
-    <input matInput [(ngModel)]="data.prefixo">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Sufixo</mat-label>
-    <input matInput [(ngModel)]="data.sufixo">
-  </mat-form-field>
+  <div class="container-conteudo">
+    <p>Telephone Number(s)</p>
+    <mat-form-field>
+      <mat-label>CN</mat-label>
+      <input matInput [(ngModel)]="data.cn" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Prefixo</mat-label>
+      <input matInput [(ngModel)]="data.prefixo" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Sufixo</mat-label>
+      <input matInput [(ngModel)]="data.sufixo" disabled>
+    </mat-form-field>
+  </div>
+  <div class="container-conteudo">
+    <p>Virtual Number(s)</p>
+    <mat-form-field>
+      <mat-label>prefixoV</mat-label>
+      <input matInput [(ngModel)]="data.prefixoV">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>sufixoV</mat-label>
+      <input matInput [(ngModel)]="data.sufixoV">
+    </mat-form-field>
+  </div>
+
 </div>
 <div mat-dialog-actions>
   <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-  <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
+  <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Alterar</button>
 </div>

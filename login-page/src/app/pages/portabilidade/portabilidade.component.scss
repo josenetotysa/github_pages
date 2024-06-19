@@ -1,3 +1,5 @@
+@import "../../../styles/variables.scss";
+
 :host ::ng-deep {
     padding: 20px;
     flex: 1;
@@ -5,7 +7,7 @@
     align-items: center;
 
     .mat-icon {
-        color: #1b5996;
+        color: $primary-color;
         cursor: pointer;
     }
 
@@ -14,6 +16,13 @@
 
     }
 }
+
+.container-title{
+    display: flex;
+    margin-bottom: 5px;
+}
+
+
 
 app-titles {
     text-align: center;
@@ -45,7 +54,7 @@ section {
     width: 50%;
     display: flex;
     justify-content: end;
-    gap: 10px;
+    gap: 5px;
 
 }
 

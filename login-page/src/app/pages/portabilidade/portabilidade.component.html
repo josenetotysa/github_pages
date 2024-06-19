@@ -1,3 +1,4 @@
+
 <section>
         <app-titles>Portabilidade</app-titles>
 
@@ -18,27 +19,33 @@
                         <mat-label>Filtrar por Sufixo</mat-label>
                         <input matInput (keyup)="applyFilter('sufixo', $event)" placeholder="Sufixo">
                       </mat-form-field>
-
-                      <mat-form-field *ngIf="filtroPrefixoTVisivel">
+                    
+                      <mat-form-field *ngIf="filtroprefixoVVisivel">
                         <mat-label>Filtrar por Prefixo</mat-label>
-                        <input matInput (keyup)="applyFilter('prefixoT', $event)" placeholder="PrefixoT">
+                        <input matInput (keyup)="applyFilter('prefixoV', $event)" placeholder="prefixoV">
                       </mat-form-field>
                       
-                      <mat-form-field *ngIf="filtroSufixoTVisivel">
+                      <mat-form-field *ngIf="filtrosufixoVVisivel">
                         <mat-label>Filtrar por Sufixo</mat-label>
-                        <input matInput (keyup)="applyFilter('sufixoT', $event)" placeholder="SufixoT">
+                        <input matInput (keyup)="applyFilter('sufixoV', $event)" placeholder="sufixoV">
                       </mat-form-field>
                     
                       <div class="buttonConfig">
                           <button class="custom-button" mat-button (click)="toggleFiltro('cn')">CN</button>
                           <button class="custom-button" mat-button (click)="toggleFiltro('prefixo')">Prefixo</button>
                           <button class="custom-button" mat-button (click)="toggleFiltro('sufixo')">Sufixo</button>
-                          <button class="custom-button" mat-button (click)="toggleFiltro('prefixoT')">PrefixoT</button>
-                          <button class="custom-button" mat-button (click)="toggleFiltro('sufixoT')">SufixoT</button>
+                          <button class="custom-button" mat-button (click)="toggleFiltro('prefixoV')">prefixoV</button>
+                          <button class="custom-button" mat-button (click)="toggleFiltro('sufixoV')">sufixoV</button>
                       </div>
                 </div>
+
+                <div class="container-title">
+                    <div style="width: 45%; text-align: center; border-bottom: 2px solid #1b5996; margin-right: 5px;"><span>Telephone Number(s)</span></div>
+                    <div style="width: 38%; text-align: center; border-bottom: 2px solid #1b5996; margin-left: 5px;"><span>Virtual Number(s)</span></div>
+                    <div style="width: auto;"></div>
+                </div>
                 <div class="container-table">
-        
+                   
         
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         
@@ -57,14 +64,14 @@
                             <td mat-cell *matCellDef="let element" class="center"> {{element.sufixo}} </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="prefixoT">
-                            <th mat-header-cell *matHeaderCellDef class="center"> PrefixoT </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.prefixoT}} </td>
+                        <ng-container matColumnDef="prefixoV">
+                            <th mat-header-cell *matHeaderCellDef class="center"> prefixoV </th>
+                            <td mat-cell *matCellDef="let element" class="center"> {{element.prefixoV}} </td>
                         </ng-container>
         
-                        <ng-container matColumnDef="sufixoT">
-                            <th mat-header-cell *matHeaderCellDef class="center"> SufixoT </th>
-                            <td mat-cell *matCellDef="let element" class="center"> {{element.sufixoT}} </td>
+                        <ng-container matColumnDef="sufixoV">
+                            <th mat-header-cell *matHeaderCellDef class="center"> sufixoV </th>
+                            <td mat-cell *matCellDef="let element" class="center"> {{element.sufixoV}} </td>
                         </ng-container>
         
                         <ng-container matColumnDef="editar">

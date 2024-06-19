@@ -1,13 +1,19 @@
-<h1 mat-dialog-title>Editar Item</h1>
-<div mat-dialog-content class="container-all">
+<div class="container-title">
+    <h1 mat-dialog-title>Editar Item</h1>
+    <button mat-icon-button class="close-button" (click)="onCloseClick()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
 
+<div mat-dialog-content class="container-all">
+    <div class="container-conteudo">
     <mat-form-field>
         <mat-label>RN1</mat-label>
-        <input matInput [(ngModel)]="data.rn1">
+        <input matInput [(ngModel)]="data.rn1" disabled>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Operadora</mat-label>
-        <input matInput [(ngModel)]="data.operadora">
+        <input matInput [(ngModel)]="data.operadora" disabled>
     </mat-form-field>
     <mat-form-field>
         <mat-label>RN2</mat-label>
@@ -18,7 +24,8 @@
         <input matInput [(ngModel)]="data.rel">
     </mat-form-field>
 </div>
+</div>
 <div mat-dialog-actions>
     <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-    <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
+    <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Alterar</button>
 </div>

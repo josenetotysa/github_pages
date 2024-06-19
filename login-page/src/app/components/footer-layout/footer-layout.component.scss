@@ -9,12 +9,12 @@ footer {
 
     .date-hour{
         font-size: 14px;
-        color: #212121;
+        color: $text-fontNormal-color;
     }
     p{
         margin: 0;
     }
     span{
-        color: #585858;
+        color: $text-fontLight-color;
     }
 }

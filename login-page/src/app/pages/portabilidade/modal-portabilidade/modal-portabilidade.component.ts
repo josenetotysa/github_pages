@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-modal-portabilidade',
@@ -15,7 +16,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   styleUrl: './modal-portabilidade.component.scss'
 })
@@ -28,4 +30,9 @@ export class ModalPortabilidadeComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
+  onCloseClick(): void {
+    this.dialogRef.close();
+  }
+
 }
