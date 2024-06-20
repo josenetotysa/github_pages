@@ -1,4 +1,7 @@
 <section>
+
+    <app-titles class="center">Iniciar sessão</app-titles>
+
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
         <app-primary-input
             formControlName="login"
@@ -15,7 +18,7 @@
             label="Senha"
         ></app-primary-input>
   
-        <span class="">Esqueceu a senha?</span>
+        <a [routerLink]="['/forgotPassword']">Esqueceu a senha?</a>
   
         <app-button-blue-click type="submit" [disabled]="loginForm.invalid">entrar</app-button-blue-click>
     </form>

@@ -4,6 +4,8 @@ import { PrimaryInputComponent } from '../../components/primary-input/primary-in
 import { ButtonBlueClickComponent } from '../../components/button-blue-click/button-blue-click.component';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { TitlesComponent } from '../../components/titles/titles.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,9 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     ReactiveFormsModule,
     PrimaryInputComponent,
-    ButtonBlueClickComponent
+    ButtonBlueClickComponent,
+    TitlesComponent,
+    RouterModule
   ],
   providers: [
     AuthService
@@ -29,8 +33,8 @@ export class LoginComponent {
     private toastService: ToastrService
   ) {
     this.loginForm = new FormGroup({
-      login: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      login: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
 

@@ -11,7 +11,9 @@ import { MatPaginator, MatPaginatorModule, MatPaginatorIntl} from '@angular/mate
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalListusersComponent } from './modal-listusers/modal-listusers.component';
 import { UserResponse } from '../../types/user-response.type';
-import { ListUsersService } from '../../services/list-users.service';
+import { ListUsersService } from '../../services/user/list-users.service';
+import { Subscription } from 'rxjs';
+ListUsersService
 
 
 @Component({
@@ -34,10 +36,11 @@ import { ListUsersService } from '../../services/list-users.service';
 })
 export class ListUsersComponent {
 
-  displayedColumns: string[] = ['login', 'name', 'email', 'password', 'editar'];
+  displayedColumns: string[] = ['login', 'name', 'email', 'editar'];
   dataSource = new MatTableDataSource<UserResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  private usersUpdatedSubscription: Subscription | undefined;
 
   ngAfterViewInit() { 
     this.dataSource.paginator = this.paginator;
@@ -51,6 +54,7 @@ export class ListUsersComponent {
 
   ngOnInit() {
     this.loadUsers();
+    this.subscribeToUsersUpdated();
   }
 
   loadUsers() {
@@ -93,7 +97,7 @@ export class ListUsersComponent {
   openDialog(element: UserResponse): void {
     const dialogRef = this.dialog.open(ModalListusersComponent, {
       width: '450px',
-      data: { login: element.login, name: element.name, email: element.email, password: element.password }
+      data: { login: element.login, name: element.name, email: element.email}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -101,8 +105,19 @@ export class ListUsersComponent {
         element.login = result.login;
         element.name = result.name;
         element.email = result.email;
-        element.password =  result.password;
       }
     });
+  }
+
+  private subscribeToUsersUpdated(): void {
+    this.usersUpdatedSubscription = this.listUsersService.getUsersUpdatedObservable().subscribe(() => {
+      this.loadUsers();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.usersUpdatedSubscription) {
+      this.usersUpdatedSubscription.unsubscribe();
+    }
   }
 }

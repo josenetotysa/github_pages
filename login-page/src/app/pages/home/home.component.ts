@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       const userName = sessionStorage.getItem("username");
-      console.log(`se liga ${userName}`);
       if (userName) {
         this.userName = userName;
       } else {

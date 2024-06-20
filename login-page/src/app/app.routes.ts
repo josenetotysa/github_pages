@@ -9,6 +9,7 @@ import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.comp
 import { OperadorasComponent } from './pages/operadoras/operadoras.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthguardService } from './services/not-authguard.service';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     {
@@ -46,6 +47,11 @@ export const routes: Routes = [
         path: "operadoras",
         component: OperadorasComponent,
         canActivate: [AuthGuard]
+    },
+
+    {
+        path: "forgotPassword",
+        component: ForgotPasswordComponent,
     },
 
     {
