@@ -19,7 +19,7 @@ export class ListUsersService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-
+    console.log("entrou aqui -->")
     return this.httpClient.get<UserResponse[]>(`${this.apiUrl}/list`, { headers: headers });
   }
 

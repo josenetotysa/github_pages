@@ -30,7 +30,7 @@ export class AuthService {
   signup(name: string, email: string, login: string, password: string){
     return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { name, email, login, password }).pipe(
       tap((value) => {
-        sessionStorage.setItem("auth-token", value.token)
+        // sessionStorage.setItem("auth-token", value.token)
       })
     );
   }
