@@ -34,6 +34,6 @@ export class ForgotPasswordComponent {
       }
 
     submit() {
-        console.log("adsasdasdasd")
+        
       }
 }

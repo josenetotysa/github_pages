@@ -4,9 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { FooterLayoutComponent } from './components/footer-layout/footer-layout.component';
 import { HeaderLayoutComponent } from './components/header-layout/header-layout.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
-
 
 @Component({
   selector: 'app-root',

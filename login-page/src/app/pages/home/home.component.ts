@@ -20,8 +20,6 @@ export class HomeComponent implements OnInit {
       const userName = sessionStorage.getItem("username");
       if (userName) {
         this.userName = userName;
-      } else {
-        console.warn("Nenhum login encontrado no localStorage");
       }
     } else {
       console.warn("Usuário não autenticado");

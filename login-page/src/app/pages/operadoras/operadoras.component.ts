@@ -11,7 +11,8 @@ import { MatPaginator, MatPaginatorModule, MatPaginatorIntl} from '@angular/mate
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalOperadorasComponent } from './modal-operadoras/modal-operadoras.component';
 import { OperadoraResponse } from '../../types/operadora-response.type';
-import { ListOperadorasService } from '../../services/list-operadoras.service';
+import { ListOperadorasService } from '../../services/operadora/list-operadoras.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-operadoras',
@@ -37,6 +38,11 @@ export class OperadorasComponent {
   dataSource = new MatTableDataSource<OperadoraResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  private operadorasUpdatedSubscription: Subscription | undefined;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(
     private listOperadorasService: ListOperadorasService,
@@ -46,12 +52,9 @@ export class OperadorasComponent {
 
   ngOnInit() {
     this.loadOperadoras();
+    this.subscribeToOperadorasUpdated();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  
   loadOperadoras() {
     this.listOperadorasService.listOperadoras().subscribe(
       (operadoras: OperadoraResponse[]) => {
@@ -59,7 +62,7 @@ export class OperadorasComponent {
       },
       (error) => {
         console.error('Erro ao carregar usuários:', error);
-        this.toastService.error('Erro ao carregar Routing Numbers', 'Ocorreu um erro ao tentar carregar os Routing Numbers.');
+        this.toastService.error('Ocorreu um erro ao tentar carregar os dados.', 'Erro ao carregar Routing Numbers', );
       }
     );
   }
@@ -103,5 +106,17 @@ export class OperadorasComponent {
         element.rel = result.rel;
       }
     });
+  }
+
+  private subscribeToOperadorasUpdated(): void {
+    this.operadorasUpdatedSubscription = this.listOperadorasService.getOperadorasUpdatedObservable().subscribe(() => {
+      this.loadOperadoras();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.operadorasUpdatedSubscription) {
+      this.operadorasUpdatedSubscription.unsubscribe();
+    }
   }
 }

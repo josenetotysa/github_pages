@@ -13,8 +13,6 @@ import { ModalListusersComponent } from './modal-listusers/modal-listusers.compo
 import { UserResponse } from '../../types/user-response.type';
 import { ListUsersService } from '../../services/user/list-users.service';
 import { Subscription } from 'rxjs';
-ListUsersService
-
 
 @Component({
   selector: 'app-list-users',
@@ -63,8 +61,7 @@ export class ListUsersComponent {
         this.dataSource.data = users;
       },
       (error) => {
-        console.error('Erro ao carregar usuários:', error);
-        this.toastService.error('Erro ao carregar usuários', 'Ocorreu um erro ao tentar carregar os usuários.');
+        this.toastService.error('Ocorreu um erro ao tentar carregar os dados.', 'Erro ao carregar Usuários', );
       }
     );
   }

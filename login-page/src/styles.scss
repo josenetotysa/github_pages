@@ -1,8 +1,66 @@
+@use '@angular/material' as mat;
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./styles/variables.scss";
 
 @import 'ngx-toastr/toastr';
+
+@include mat.core();
+
+
+$custom-primary-palette: (
+  50: #e0ebf5,    // Tom mais claro
+  100: #afd4ec,   // Azul claro mais vivido
+  200: #7cbbe3,   // Azul médio mais vivido
+  300: #4aa2da,   // Azul mais forte mais vivido
+  400: #1e89d1,   // Azul mais intenso mais vivido
+  500: #1b5996,   // Cor principal
+  600: #194d8a,   // Azul mais escuro mais vivido
+  700: #163e75,   // Azul ainda mais escuro mais vivido
+  800: #11336a,   // Azul profundo mais vivido
+  900: #092133,   // Azul bem profundo mais vivido
+
+  contrast: (   // Abertura do mapa de contraste
+    50: #000,  
+    100: #000,  
+    200: #000,   
+    300: #fff,  
+    400: #fff,  
+    500: #fff,
+    600: #fff,  
+    700: #fff,  
+    800: #fff,  
+    900: #fff   // Faltava uma vírgula aqui
+  )   // Fechamento do mapa de contraste
+);
+
+$custom-primary: mat.define-palette($custom-primary-palette);
+$my-accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
+
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-primary,
+    accent: $my-accent
+  ),
+
+  typography: mat.define-typography-config(),
+  density: 0,
+   ));
+
+
+// $my-primary: mat.define-palette(mat.$indigo-palette, 500);
+// $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// $my-theme: mat.define-light-theme((
+//  color: (
+//    primary: $my-primary,
+//    accent: $my-accent,
+//  ),
+//  typography: mat.define-typography-config(),
+//  density: 0,
+// ));
+
+@include mat.all-component-themes($custom-theme);
 
 * {
   margin: 0;

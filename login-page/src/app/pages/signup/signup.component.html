@@ -4,16 +4,17 @@
 
         <app-primary-input
             formControlName="name"
+            [formControl]="nameControl"
             inputName="name"
             type="text"
-            label="Nome Completo"
+            label="Nome"
             placeholder="João Silva"
         >
         </app-primary-input>
-        
 
         <app-primary-input
             formControlName="email"
+            [formControl]="emailControl"
             inputName="email"
             type="email"
             label="Email"
@@ -23,6 +24,7 @@
 
         <app-primary-input
             formControlName="login"
+            [formControl]="loginControl"
             inputName="login"
             type="text"
             label="Login"
@@ -32,6 +34,7 @@
 
         <app-primary-input
             formControlName="password"
+            [formControl]="passwordControl"
             inputName="password"
             type="password"
             label="Senha"

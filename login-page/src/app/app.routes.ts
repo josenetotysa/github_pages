@@ -10,6 +10,7 @@ import { OperadorasComponent } from './pages/operadoras/operadoras.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthguardService } from './services/not-authguard.service';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { MaterialTestComponent } from './material-test/material-test.component';
 
 export const routes: Routes = [
     {
@@ -52,6 +53,11 @@ export const routes: Routes = [
     {
         path: "forgotPassword",
         component: ForgotPasswordComponent,
+    },
+
+    {
+        path: "materialTeste",
+        component: MaterialTestComponent,
     },
 
     {

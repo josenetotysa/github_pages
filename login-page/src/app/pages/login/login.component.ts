@@ -30,12 +30,20 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private toastService: ToastrService
+    private toastService: ToastrService   
   ) {
     this.loginForm = new FormGroup({
-      login: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(3)])
+      login: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     });
+  }
+
+  get loginControl() {
+    return this.loginForm.get('login') as FormControl;
+  }
+
+  get passwordControl() {
+    return this.loginForm.get('password') as FormControl;
   }
 
   submit() {

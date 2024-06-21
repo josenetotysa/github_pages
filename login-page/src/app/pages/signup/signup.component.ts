@@ -22,8 +22,6 @@ import { CommonModule } from '@angular/common'
 })
 export class SignupComponent {
 
-
-
   signupForm: FormGroup;
 
   constructor(
@@ -36,6 +34,22 @@ export class SignupComponent {
       login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
+  }
+
+  get nameControl() {
+    return this.signupForm.get('name') as FormControl;
+  }
+
+  get emailControl() {
+    return this.signupForm.get('email') as FormControl;
+  }
+
+  get loginControl() {
+    return this.signupForm.get('login') as FormControl;
+  }
+
+  get passwordControl() {
+    return this.signupForm.get('password') as FormControl;
   }
 
   submit() {

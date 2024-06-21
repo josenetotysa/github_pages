@@ -5,11 +5,14 @@
         <input
             [type]="type"
             [placeholder]="placeholder"
-            [value]="value"
+            [formControl]="formControl"
             (input)="onInput($event)"
         />
-        <!-- <div class="icon">             ######### add icon depois
-            <ng-content></ng-content>
-        </div> -->
+    </div>
+    <div *ngIf="formControl.invalid && formControl.touched" class="error-message">
+        <span *ngIf="formControl.errors?.['required']">{{ label }} é obrigatório.</span>
+        <span *ngIf="formControl.errors?.['minlength']">{{ label }} deve ter no mínimo {{ formControl.errors?.['minlength']?.requiredLength }} caracteres.</span>
+        <span *ngIf="formControl.errors?.['maxlength']">{{ label }} deve ter no máximo {{ formControl.errors?.['maxlength']?.requiredLength }} caracteres.</span>
+        <span *ngIf="formControl.errors?.['email']">Formato de email inválido.</span>
     </div>
 </div>
