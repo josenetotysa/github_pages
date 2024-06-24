@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, Injectable, ViewChild, inject } from '@angular/core';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,30 @@ import { ModalOperadorasComponent } from './modal-operadoras/modal-operadoras.co
 import { OperadoraResponse } from '../../types/operadora-response.type';
 import { ListOperadorasService } from '../../services/operadora/list-operadoras.service';
 import { Subscription } from 'rxjs';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+
+@Injectable()
+export class CustomPaginatorIntl extends MatPaginatorIntl {
+
+  override itemsPerPageLabel = 'Itens por página:';
+  override nextPageLabel = 'Próxima página';
+  override previousPageLabel = 'Página anterior';
+  override firstPageLabel = 'Primeira página';
+  override lastPageLabel = 'Última página';
+  
+  override getRangeLabel: (page: number, pageSize: number, length: number) => string = 
+    (page: number, pageSize: number, length: number): string => {
+    if (length === 0 || pageSize === 0) {
+      return `0 de ${length}`;
+    }
+    length = Math.max(length, 0);
+    const startIndex = page * pageSize;
+    const endIndex = startIndex < length ?
+        Math.min(startIndex + pageSize, length) :
+        startIndex + pageSize;
+    return `${startIndex + 1} - ${endIndex} de ${length}`;
+  };
+}
 
 @Component({
   selector: 'app-operadoras',
@@ -28,6 +52,7 @@ import { Subscription } from 'rxjs';
     MatPaginator,
     MatPaginatorModule,
     MatDialogModule,
+    MatSortModule
   ],
   templateUrl: './operadoras.component.html',
   styleUrl: './operadoras.component.scss'
@@ -38,10 +63,18 @@ export class OperadorasComponent {
   dataSource = new MatTableDataSource<OperadoraResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   private operadorasUpdatedSubscription: Subscription | undefined;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    const sortState: Sort = { active: 'rn1', direction: 'asc' };
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
   }
 
   constructor(
@@ -51,6 +84,7 @@ export class OperadorasComponent {
   ) { }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
     this.loadOperadoras();
     this.subscribeToOperadorasUpdated();
   }
@@ -69,18 +103,15 @@ export class OperadorasComponent {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-  
-    // Dividir o filtro em termos individuais
+
     const filters = filterValue.split(' ');
-  
-    // Aplicar o filtro customizado
+
     this.dataSource.filterPredicate = (data: OperadoraResponse, filter: string) => {
       const searchString = filter.toLowerCase().trim();
       let matches = true;
   
-      // Verificar se algum dos termos do filtro está presente em rn1 ou operadora
       filters.forEach(term => {
-        if (!(data.rn1.toLowerCase().includes(term) || data.operadora.toLowerCase().includes(term))) {
+        if (!(data.routernumber.toLowerCase().includes(term) || data.telconame.toLowerCase().includes(term))) {
           matches = false;
         }
       });
@@ -88,22 +119,21 @@ export class OperadorasComponent {
       return matches;
     };
   
-    // Aplicar o filtro
     this.dataSource.filter = filterValue;
   }
 
   openDialog(element: OperadoraResponse): void {
     const dialogRef = this.dialog.open(ModalOperadorasComponent, {
       width: '450px',
-      data: { rn1: element.rn1, operadora: element.operadora, rn2: element.rn2, rel: element.rel }
+      data: { rn1: element.routernumber, operadora: element.telconame, rn2: element.telcomap, rel: element.releasenumber }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        element.rn1 = result.rn1;
-        element.operadora = result.operadora;
-        element.rn2 = result.rn2;
-        element.rel = result.rel;
+        element.routernumber = result.rn1;
+        element.telconame = result.operadora;
+        element.telcomap = result.rn2;
+        element.releasenumber = result.rel;
       }
     });
   }

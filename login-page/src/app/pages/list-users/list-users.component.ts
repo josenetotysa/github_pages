@@ -1,7 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
-import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { Component, ViewChild, Injectable } from '@angular/core';
 import { TitlesComponent } from '../../components/titles/titles.component';
 import { MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatInputModule} from '@angular/material/input';
@@ -13,6 +10,33 @@ import { ModalListusersComponent } from './modal-listusers/modal-listusers.compo
 import { UserResponse } from '../../types/user-response.type';
 import { ListUsersService } from '../../services/user/list-users.service';
 import { Subscription } from 'rxjs';
+import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
+
+@Injectable()
+export class CustomPaginatorIntl extends MatPaginatorIntl {
+
+  override itemsPerPageLabel = 'Itens por página:';
+  override nextPageLabel = 'Próxima página';
+  override previousPageLabel = 'Página anterior';
+  override firstPageLabel = 'Primeira página';
+  override lastPageLabel = 'Última página';
+  
+  override getRangeLabel: (page: number, pageSize: number, length: number) => string = 
+    (page: number, pageSize: number, length: number): string => {
+    if (length === 0 || pageSize === 0) {
+      return `0 de ${length}`;
+    }
+    length = Math.max(length, 0);
+    const startIndex = page * pageSize;
+    const endIndex = startIndex < length ?
+        Math.min(startIndex + pageSize, length) :
+        startIndex + pageSize;
+    return `${startIndex + 1} - ${endIndex} de ${length}`;
+  };
+}
 
 @Component({
   selector: 'app-list-users',
@@ -28,9 +52,11 @@ import { Subscription } from 'rxjs';
     MatPaginator,
     MatPaginatorModule,
     MatDialogModule,
+    MatSortModule
   ],
   templateUrl: './list-users.component.html',
-  styleUrl: './list-users.component.scss'
+  styleUrl: './list-users.component.scss',
+  providers: [{provide: MatPaginatorIntl, useClass: CustomPaginatorIntl}],
 })
 export class ListUsersComponent {
 
@@ -38,10 +64,18 @@ export class ListUsersComponent {
   dataSource = new MatTableDataSource<UserResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  
   private usersUpdatedSubscription: Subscription | undefined;
 
   ngAfterViewInit() { 
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    const sortState: Sort = { active: 'login', direction: 'asc' };
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
   }
   
   constructor(
@@ -51,6 +85,7 @@ export class ListUsersComponent {
   ) { }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
     this.loadUsers();
     this.subscribeToUsersUpdated();
   }
@@ -69,15 +104,12 @@ export class ListUsersComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
   
-    // Dividir o filtro em termos individuais
     const filters = filterValue.split(' ');
   
-    // Aplicar o filtro customizado
     this.dataSource.filterPredicate = (data: UserResponse, filter: string) => {
       const searchString = filter.toLowerCase().trim();
       let matches = true;
   
-      // Verificar se algum dos termos do filtro está presente em rn1 ou operadora
       filters.forEach(term => {
         if (!(data.login.toLowerCase().includes(term) || data.name.toLowerCase().includes(term) || data.email.toLowerCase().includes(term))) {
           matches = false;
@@ -87,7 +119,6 @@ export class ListUsersComponent {
       return matches;
     };
   
-    // Aplicar o filtro
     this.dataSource.filter = filterValue;
   }
 

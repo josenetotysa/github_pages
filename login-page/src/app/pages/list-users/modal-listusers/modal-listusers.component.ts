@@ -53,13 +53,16 @@ export class ModalListusersComponent {
   submit() {
     
     const { name, email, login, password } = this.data;
+    console.log('Dados enviados:', { name, email, login, password });
 
     this.updateUsersService.updateUsers(name, email, login, password).subscribe(
        (response) => {
+        console.log('Resposta da API:', response);
         this.toastrService.success('Campo(s) alterado(s) com sucesso', 'Alteração bem sucedida!'),
         this.dialogRef.close();
       },
       (error) => {
+        console.error('Erro ao atualizar dados:', error);
         this.toastrService.error('Tente novamente', 'Erro ao atualizar dados:');
       },
       () => {

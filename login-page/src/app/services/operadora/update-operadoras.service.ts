@@ -15,13 +15,13 @@ export class UpdateOperadorasService {
 
   constructor(private httpClient: HttpClient) { }
 
-  updateOperadoras(rn1: string, rel: string, rn2: string): Observable<OperadoraResponse[]> {
+  updateOperadoras(routernumber: string, telcomap: string, releasenumber: number): Observable<OperadoraResponse[]> {
     const token = sessionStorage.getItem('auth-token');
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.httpClient.put<OperadoraResponse[]>(`${this.apiUrl}/update`,  { rn1, rel, rn2 } , { headers: headers })
+    return this.httpClient.put<OperadoraResponse[]>(`${this.apiUrl}/update`,  { routernumber, telcomap, releasenumber } , { headers: headers })
   }
 
 }
