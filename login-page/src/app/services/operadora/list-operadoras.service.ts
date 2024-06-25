@@ -29,6 +29,5 @@ export class ListOperadorasService {
 
   notifyOperadorasUpdated(): void {
     this.operadorasUpdatedSubject.next();
-    console.log("fui notificado!!!")
   }
 }

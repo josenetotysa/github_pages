@@ -59,7 +59,7 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
 })
 export class OperadorasComponent {
 
-  displayedColumns: string[] = ['rn1', 'operadora', 'rn2', 'rel', 'editar'];
+  displayedColumns: string[] = ['routernumber', 'telconame', 'telcomap', 'releasenumber', 'editar'];
   dataSource = new MatTableDataSource<OperadoraResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -71,10 +71,12 @@ export class OperadorasComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    const sortState: Sort = { active: 'rn1', direction: 'asc' };
+    setTimeout(() => {
+    const sortState: Sort = { active: 'routernumber', direction: 'asc' };
     this.sort.active = sortState.active;
     this.sort.direction = sortState.direction;
     this.sort.sortChange.emit(sortState);
+    });
   }
 
   constructor(
@@ -95,32 +97,26 @@ export class OperadorasComponent {
         this.dataSource.data = operadoras;
       },
       (error) => {
-        console.error('Erro ao carregar usuários:', error);
         this.toastService.error('Ocorreu um erro ao tentar carregar os dados.', 'Erro ao carregar Routing Numbers', );
       }
     );
   }
 
   applyFilter(event: Event) {
+    // Captura o valor do filtro, remove espaços em branco e converte para minúsculas
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-
-    const filters = filterValue.split(' ');
-
+  
+    // Define o predicado de filtro para a fonte de dados
     this.dataSource.filterPredicate = (data: OperadoraResponse, filter: string) => {
-      const searchString = filter.toLowerCase().trim();
-      let matches = true;
-  
-      filters.forEach(term => {
-        if (!(data.routernumber.toLowerCase().includes(term) || data.telconame.toLowerCase().includes(term))) {
-          matches = false;
-        }
-      });
-  
-      return matches;
+      // Verifica se o valor do filtro está presente no routernumber ou telconame
+      return data.routernumber.toLowerCase().includes(filter) || 
+             data.telconame.toLowerCase().includes(filter);
     };
   
+    // Aplica o filtro à fonte de dados
     this.dataSource.filter = filterValue;
   }
+
 
   openDialog(element: OperadoraResponse): void {
     const dialogRef = this.dialog.open(ModalOperadorasComponent, {
@@ -130,10 +126,10 @@ export class OperadorasComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        element.routernumber = result.rn1;
-        element.telconame = result.operadora;
-        element.telcomap = result.rn2;
-        element.releasenumber = result.rel;
+        element.routernumber = result.routernumber;
+        element.telconame = result.telconame;
+        element.telcomap = result.telcomap;
+        element.releasenumber = result.releasenumber;
       }
     });
   }

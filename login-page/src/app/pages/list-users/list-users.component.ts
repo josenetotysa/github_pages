@@ -72,10 +72,12 @@ export class ListUsersComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
+    setTimeout(() => {
     const sortState: Sort = { active: 'login', direction: 'asc' };
     this.sort.active = sortState.active;
     this.sort.direction = sortState.direction;
     this.sort.sortChange.emit(sortState);
+    });
   }
   
   constructor(
@@ -102,23 +104,13 @@ export class ListUsersComponent {
   }
 
   applyFilter(event: Event) {
+
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
   
-    const filters = filterValue.split(' ');
-  
     this.dataSource.filterPredicate = (data: UserResponse, filter: string) => {
-      const searchString = filter.toLowerCase().trim();
-      let matches = true;
-  
-      filters.forEach(term => {
-        if (!(data.login.toLowerCase().includes(term) || data.name.toLowerCase().includes(term) || data.email.toLowerCase().includes(term))) {
-          matches = false;
-        }
-      });
-  
-      return matches;
+      return (data.login.toLowerCase().includes(filter) || data.name.toLowerCase().includes(filter) || data.email.toLowerCase().includes(filter))
     };
-  
+    
     this.dataSource.filter = filterValue;
   }
 

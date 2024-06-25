@@ -13,22 +13,22 @@
       <div class="container-table">
 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-          <ng-container matColumnDef="rn1">
+          <ng-container matColumnDef="routernumber">
             <th mat-header-cell *matHeaderCellDef class="align" mat-sort-header> RN1 </th>
             <td mat-cell *matCellDef="let element" class="align">{{element.routernumber}}</td>
           </ng-container>
   
-          <ng-container matColumnDef="operadora">
+          <ng-container matColumnDef="telconame">
             <th mat-header-cell *matHeaderCellDef class="align" mat-sort-header> Operadora </th>
-            <td mat-cell *matCellDef="let element" class="align">{{element.telconame}}</td>
+            <td mat-cell *matCellDef="let element" class="align uppercase">{{element.telconame}}</td>
           </ng-container>
   
-          <ng-container matColumnDef="rn2">
+          <ng-container matColumnDef="telcomap">
             <th mat-header-cell *matHeaderCellDef class="align" mat-sort-header> RN2 </th>
             <td mat-cell *matCellDef="let element" class="align">{{element.telcomap}}</td>
           </ng-container>
   
-          <ng-container matColumnDef="rel">
+          <ng-container matColumnDef="releasenumber">
             <th mat-header-cell *matHeaderCellDef class="align" mat-sort-header> REL </th>
             <td mat-cell *matCellDef="let element" class="align">{{element.releasenumber}}</td>
           </ng-container>

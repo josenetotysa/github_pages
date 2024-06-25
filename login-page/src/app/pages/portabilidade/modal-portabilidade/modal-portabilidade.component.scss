@@ -13,6 +13,11 @@
     
 }
 
+p{
+    color: $text-fontNormal-color;
+    font-weight: 500;
+}
+
 .container-title{
     display: flex;
     justify-content: space-between;

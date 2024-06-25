@@ -8,26 +8,26 @@
   <div class="container-conteudo">
     <p>Telephone Number(s)</p>
     <mat-form-field>
-      <mat-label>CN</mat-label>
+      <mat-label>##</mat-label>
       <input matInput [(ngModel)]="data.cn" disabled>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Prefixo</mat-label>
+      <mat-label>####</mat-label>
       <input matInput [(ngModel)]="data.prefixo" disabled>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Sufixo</mat-label>
+      <mat-label>####</mat-label>
       <input matInput [(ngModel)]="data.sufixo" disabled>
     </mat-form-field>
   </div>
   <div class="container-conteudo">
     <p>Virtual Number(s)</p>
     <mat-form-field>
-      <mat-label>prefixoV</mat-label>
+      <mat-label>XXXX</mat-label>
       <input matInput [(ngModel)]="data.prefixoV">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>sufixoV</mat-label>
+      <mat-label>XXXX</mat-label>
       <input matInput [(ngModel)]="data.sufixoV">
     </mat-form-field>
   </div>
@@ -35,5 +35,5 @@
 </div>
 <div mat-dialog-actions>
   <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-  <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial>Alterar</button>
+  <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="submit()">Alterar</button>
 </div>

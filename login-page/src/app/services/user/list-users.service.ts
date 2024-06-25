@@ -19,7 +19,6 @@ export class ListUsersService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    console.log("entrou aqui -->")
     return this.httpClient.get<UserResponse[]>(`${this.apiUrl}/list`, { headers: headers });
   }
 
@@ -30,6 +29,5 @@ export class ListUsersService {
   // Método para notificar que os usuários foram atualizados
   notifyUsersUpdated(): void {
     this.usersUpdatedSubject.next();
-    console.log("fui notificado!!!")
   }
 }

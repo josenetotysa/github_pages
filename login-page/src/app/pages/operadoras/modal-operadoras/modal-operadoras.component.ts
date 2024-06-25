@@ -47,9 +47,9 @@ export class ModalOperadorasComponent {
 
   submit() {
     
-    const { rn1, rel, rn2 } = this.data;
+    const { rn1, rn2, rel } = this.data;
 
-    this.updateOperadorasService.updateOperadoras(rn1, rel, rn2).subscribe(
+    this.updateOperadorasService.updateOperadoras( rn1, rn2, rel ).subscribe(
       (response) => {
         this.toastrService.success('Campo(s) alterado(s) com sucesso', 'Alteração bem sucedida!'),
         this.dialogRef.close();
