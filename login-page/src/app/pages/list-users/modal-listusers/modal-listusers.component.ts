@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, Validators} from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateUsersService } from '../../../services/user/update-users.service';
@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatIconModule
   ],
@@ -27,8 +28,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ModalListusersComponent {
 
+  nameFormControl = new FormControl(this.data.name, [Validators.required, Validators.maxLength(100)]);
+  emailFormControl = new FormControl(this.data.email, [Validators.required,Validators.maxLength(60)]);
+  passwordFormControl = new FormControl(this.data.password);
+ 
   showPasswordField = false;
 
+  
   constructor(
     public dialogRef: MatDialogRef<ModalListusersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -48,12 +54,23 @@ export class ModalListusersComponent {
 
   togglePasswordField(): void {
     this.showPasswordField = !this.showPasswordField;
+    if (this.showPasswordField) {
+      this.passwordFormControl.setValidators([Validators.required, Validators.maxLength(45)]);
+    } else {
+      this.passwordFormControl.clearValidators();
+    }
+    this.passwordFormControl.updateValueAndValidity();
   }
-
+  
   submit() {
     
+    if (this.nameFormControl.invalid || this.emailFormControl.invalid  || this.passwordFormControl.invalid) {
+      this.toastrService.error('Verifique os campos', 'Erro ao atualizar dados:');
+      this.listUsersService.notifyUsersUpdated();
+      return;
+    }
+
     const { name, email, login, password } = this.data;
-    console.log('Dados enviados:', { name, email, login, password });
 
     this.updateUsersService.updateUsers(name, email, login, password).subscribe(
        () => {

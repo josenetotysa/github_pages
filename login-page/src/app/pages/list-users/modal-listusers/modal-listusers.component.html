@@ -4,6 +4,7 @@
         <mat-icon>close</mat-icon>
     </button>
 </div>
+
 <div mat-dialog-content class="container-all">
     <div class="container-conteudo">
         <mat-form-field>
@@ -12,11 +13,26 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Nome</mat-label>
-            <input matInput [(ngModel)]="data.name">
+            <input matInput [(ngModel)]="data.name" [formControl]="nameFormControl">
+            <mat-error *ngIf="nameFormControl.hasError('required')">
+                Nome é <strong>obrigatório</strong>
+            </mat-error>
+            <mat-error *ngIf="nameFormControl.hasError('maxlength')">
+                Deve ter no máximo 100 caracteres
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="data.email">
+            <input matInput [(ngModel)]="data.email" [formControl]="emailFormControl">
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email é <strong>obrigatório</strong>
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('email')">
+                O Email não é <strong>valido</strong>
+            </mat-error>
+            <mat-error *ngIf="nameFormControl.hasError('maxlength')">
+                Deve ter no máximo 60 caracteres
+            </mat-error>
         </mat-form-field>
 
         <!-- <mat-form-field>
@@ -26,12 +42,18 @@
 
         <mat-form-field *ngIf="showPasswordField">
             <mat-label>Senha</mat-label>
-            <input matInput [(ngModel)]="data.password" type="password">
+            <input matInput [(ngModel)]="data.password" type="password" [formControl]="passwordFormControl">
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Senha é <strong>obrigatório</strong>
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+                Deve ter no máximo 45 caracteres
+            </mat-error>
         </mat-form-field>
 
         <a (click)="togglePasswordField()">Redefinir senha</a>
 
-        
+
     </div>
 </div>
 
@@ -39,7 +61,6 @@
     <div><button id="button-red" class="custom-button" mat-button (click)="deletar()">Deletar</button></div>
     <div id="side-button">
         <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-        <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial
-            (click)="submit()">Alterar</button>
+        <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="submit()">Alterar</button>
     </div>
 </div>

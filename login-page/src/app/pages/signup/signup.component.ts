@@ -29,10 +29,10 @@ export class SignupComponent {
     private toastService: ToastrService
   ) {
     this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
-      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(150)]),
-      login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)])
+      name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(60)]),
+      login: new FormControl('', [Validators.required, Validators.maxLength(45)]),
+      password: new FormControl('', [Validators.required, Validators.maxLength(45)])
     });
   }
 

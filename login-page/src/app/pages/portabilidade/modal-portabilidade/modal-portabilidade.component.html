@@ -22,14 +22,34 @@
   </div>
   <div class="container-conteudo">
     <p>Virtual Number(s)</p>
-    <mat-form-field>
+
+    <!-- <mat-form-field>
       <mat-label>XXXX</mat-label>
       <input matInput [(ngModel)]="data.prefixoV">
     </mat-form-field>
     <mat-form-field>
       <mat-label>XXXX</mat-label>
       <input matInput [(ngModel)]="data.sufixoV">
+    </mat-form-field> -->
+
+    <mat-form-field>
+      <mat-label>XXXX</mat-label>
+      <input matInput [formControl]="prefixoVFormControl">
+      <!-- <mat-error *ngIf="prefixoVFormControl.hasError('required')">
+        Prefixo Virtual é <strong>obrigatório</strong>
+      </mat-error> -->
+      <mat-error *ngIf="prefixoVFormControl.hasError('maxlength')">
+        Deve ter no máximo 4 caracteres
+      </mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>XXXX</mat-label>
+      <input matInput [formControl]="sufixoVFormControl">
+      <mat-error *ngIf="sufixoVFormControl.hasError('maxlength')">
+        Deve ter no máximo 4 caracteres
+      </mat-error>
+    </mat-form-field>
+
   </div>
 
 </div>

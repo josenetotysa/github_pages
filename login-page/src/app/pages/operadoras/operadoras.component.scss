@@ -13,8 +13,8 @@
         cursor: pointer;
     }
     table {
-        width: 100%;
-        white-space: nowrap
+        max-width: 660px;
+        min-height: 400px;
     }
 
     .mat-mdc-header-row {
@@ -37,7 +37,7 @@ app-titles{
 
 .container-table{
     box-shadow: 
-        0px 5px 5px 5px rgba(0, 0, 0, 0.2),
+        0px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .uppercase{

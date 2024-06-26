@@ -17,11 +17,20 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>RN2</mat-label>
-        <input matInput [(ngModel)]="data.rn2">
+        <input matInput [(ngModel)]="data.rn2" [formControl]="rn2FormControl">
+        <mat-error *ngIf="rn2FormControl.hasError('maxlength')">
+            Deve ter no máximo 10 caracteres
+        </mat-error>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Rel</mat-label>
-        <input matInput [(ngModel)]="data.rel">
+        <input matInput [(ngModel)]="data.rel" [formControl]="relFormControl">
+        <mat-error *ngIf="relFormControl.hasError('required')">
+            REL é <strong>obrigatório</strong>
+        </mat-error>
+        <mat-error *ngIf="relFormControl.hasError('maxlength')">
+            Deve ter no máximo 3 caracteres
+        </mat-error>
     </mat-form-field>
 </div>
 </div>
