@@ -55,7 +55,9 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
     MatSortModule
   ],
   templateUrl: './operadoras.component.html',
-  styleUrl: './operadoras.component.scss'
+  styleUrl: './operadoras.component.scss',
+
+  providers: [{provide: MatPaginatorIntl, useClass: CustomPaginatorIntl}],
 })
 export class OperadorasComponent {
 

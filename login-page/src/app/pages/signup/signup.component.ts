@@ -29,15 +29,15 @@ export class SignupComponent {
     private toastService: ToastrService
   ) {
     this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      fullname: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(60)]),
-      login: new FormControl('', [Validators.required, Validators.maxLength(45)]),
+      username: new FormControl('', [Validators.required, Validators.maxLength(45)]),
       password: new FormControl('', [Validators.required, Validators.maxLength(45)])
     });
   }
 
   get nameControl() {
-    return this.signupForm.get('name') as FormControl;
+    return this.signupForm.get('fullname') as FormControl;
   }
 
   get emailControl() {
@@ -45,7 +45,7 @@ export class SignupComponent {
   }
 
   get loginControl() {
-    return this.signupForm.get('login') as FormControl;
+    return this.signupForm.get('username') as FormControl;
   }
 
   get passwordControl() {
@@ -55,9 +55,9 @@ export class SignupComponent {
   submit() {
     if (this.signupForm.valid) {
       this.authService.signup(
-        this.signupForm.value.name,
+        this.signupForm.value.fullname,
         this.signupForm.value.email,
-        this.signupForm.value.login,
+        this.signupForm.value.username,
         this.signupForm.value.password
       ).subscribe({
         next: () => this.toastService.success('Usuário Cadastrado!', 'Cadastro realizado com sucesso!'),

@@ -4,7 +4,7 @@
                 <div>
                     <mat-form-field>
                         <mat-label>Pesquisar</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Digite o Login, Nome ou Email **[Enter]**" #input>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Digite o Username, Fullname ou Email **[Enter]**" #input>
                     </mat-form-field>
                 </div>
         
@@ -13,14 +13,14 @@
                 
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort> 
         
-                        <ng-container matColumnDef="login">
-                            <th mat-header-cell *matHeaderCellDef class="left" mat-sort-header> Login </th>
-                            <td mat-cell *matCellDef="let element" class="left"> {{element.login}} </td>
+                        <ng-container matColumnDef="username">
+                            <th mat-header-cell *matHeaderCellDef class="left" mat-sort-header> Username </th>
+                            <td mat-cell *matCellDef="let element" class="left"> {{element.username}} </td>
                         </ng-container>
         
-                        <ng-container matColumnDef="name">
+                        <ng-container matColumnDef="fullname">
                             <th mat-header-cell *matHeaderCellDef class="left" mat-sort-header> Nome </th>
-                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
                         </ng-container>
         
                         <ng-container matColumnDef="email">

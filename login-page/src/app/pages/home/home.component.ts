@@ -11,15 +11,15 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  userName: string = "";
+  fullname: string = "";
   constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      const userName = sessionStorage.getItem("username");
-      if (userName) {
-        this.userName = userName;
+      const fullname = sessionStorage.getItem("fullname");
+      if (fullname) {
+        this.fullname = fullname;
       }
     } else {
       console.warn("Usuário não autenticado");

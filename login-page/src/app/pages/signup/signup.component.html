@@ -3,9 +3,9 @@
     <form [formGroup]="signupForm" (ngSubmit)="submit()">
 
         <app-primary-input
-            formControlName="name"
+            formControlName="fullname"
             [formControl]="nameControl"
-            inputName="name"
+            inputName="fullname"
             type="text"
             label="Nome"
             placeholder="João Silva"
@@ -23,11 +23,11 @@
         </app-primary-input>
 
         <app-primary-input
-            formControlName="login"
+            formControlName="username"
             [formControl]="loginControl"
-            inputName="login"
+            inputName="username"
             type="text"
-            label="Login"
+            label="Username"
             placeholder="Max: 8 Caracteres"
         >
         </app-primary-input>

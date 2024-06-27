@@ -100,8 +100,9 @@ export class PortabilidadeComponent {
             cn: realnumber.substring(0, 2),
             prefixo: realnumber.substring(2, 6),
             sufixo: realnumber.substring(6, 10),
+            
             prefixoV: virtualnumber.substring(0, 4),
-          sufixoV: virtualnumber.substring(4, 8)
+            sufixoV: virtualnumber.substring(4, 8)
           };
         });
         this.dataSource.data = transformedData;

@@ -3,11 +3,11 @@
   
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <app-primary-input
-        formControlName="login"
+        formControlName="username"
         [formControl]="loginControl"
-        inputName="login"
+        inputName="username"
         type="text"
-        label="Login"
+        label="Username"
         placeholder="Ex: 123456"
       ></app-primary-input>
   

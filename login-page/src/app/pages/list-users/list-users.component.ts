@@ -60,7 +60,7 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
 })
 export class ListUsersComponent {
 
-  displayedColumns: string[] = ['login', 'name', 'email', 'editar'];
+  displayedColumns: string[] = ['username', 'fullname', 'email', 'editar'];
   dataSource = new MatTableDataSource<UserResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -73,7 +73,7 @@ export class ListUsersComponent {
     this.dataSource.sort = this.sort;
 
     setTimeout(() => {
-    const sortState: Sort = { active: 'login', direction: 'asc' };
+    const sortState: Sort = { active: 'username', direction: 'asc' };
     this.sort.active = sortState.active;
     this.sort.direction = sortState.direction;
     this.sort.sortChange.emit(sortState);
@@ -108,7 +108,7 @@ export class ListUsersComponent {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
   
     this.dataSource.filterPredicate = (data: UserResponse, filter: string) => {
-      return (data.login.toLowerCase().includes(filter) || data.name.toLowerCase().includes(filter) || data.email.toLowerCase().includes(filter))
+      return (data.username.toLowerCase().includes(filter) || data.fullname.toLowerCase().includes(filter) || data.email.toLowerCase().includes(filter))
     };
     
     this.dataSource.filter = filterValue;
@@ -117,13 +117,13 @@ export class ListUsersComponent {
   openDialog(element: UserResponse): void {
     const dialogRef = this.dialog.open(ModalListusersComponent, {
       width: '450px',
-      data: { login: element.login, name: element.name, email: element.email}
+      data: { username: element.username, fullname: element.fullname, email: element.email}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        element.login = result.login;
-        element.name = result.name;
+        element.username = result.username;
+        element.fullname = result.fullname;
         element.email = result.email;
       }
     });

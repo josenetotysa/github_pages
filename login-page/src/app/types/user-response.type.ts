@@ -1,7 +1,7 @@
 export type UserResponse = {
     
-    login: string;
-    name: string;
+    username: string;
+    fullname: string;
     email: string;
     password: string;
 }

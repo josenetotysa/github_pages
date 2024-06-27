@@ -16,7 +16,7 @@ export class DeleteUsersService {
     private listUsersService: ListUsersService
   ) { }
 
-  deleteUsers(login: string): Observable<any>{
+  deleteUsers(username: string): Observable<any>{
     const token = sessionStorage.getItem('auth-token');
 
   //   const headers = new HttpHeaders({
@@ -31,7 +31,7 @@ export class DeleteUsersService {
 
     const options = {
       headers: headers,
-      body: { login: login } // Enviando o login como parte do corpo da requisição
+      body: { username: username } // Enviando o login como parte do corpo da requisição
     };
     // this.listUsersService.notifyUsersUpdated()
     return this.httpClient.delete<any>(`${this.apiUrl}/delete`, options);

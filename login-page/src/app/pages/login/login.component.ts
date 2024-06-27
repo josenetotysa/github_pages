@@ -33,13 +33,13 @@ export class LoginComponent {
     private toastService: ToastrService   
   ) {
     this.loginForm = new FormGroup({
-      login: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
   }
 
   get loginControl() {
-    return this.loginForm.get('login') as FormControl;
+    return this.loginForm.get('username') as FormControl;
   }
 
   get passwordControl() {
@@ -48,7 +48,7 @@ export class LoginComponent {
 
   submit() {
     if (this.loginForm.valid) {
-      this.authService.authenticate(this.loginForm.value.login, this.loginForm.value.password).subscribe({
+      this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password).subscribe({
         next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
         error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
       });

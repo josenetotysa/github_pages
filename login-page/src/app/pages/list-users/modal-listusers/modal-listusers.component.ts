@@ -28,8 +28,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ModalListusersComponent {
 
-  nameFormControl = new FormControl(this.data.name, [Validators.required, Validators.maxLength(100)]);
-  emailFormControl = new FormControl(this.data.email, [Validators.required,Validators.maxLength(60)]);
+  fullnameFormControl = new FormControl(this.data.fullname, [Validators.required, Validators.maxLength(100)]);
+  emailFormControl = new FormControl(this.data.email, [Validators.required, Validators.email , Validators.maxLength(60)]);
   passwordFormControl = new FormControl(this.data.password);
  
   showPasswordField = false;
@@ -64,15 +64,15 @@ export class ModalListusersComponent {
   
   submit() {
     
-    if (this.nameFormControl.invalid || this.emailFormControl.invalid  || this.passwordFormControl.invalid) {
+    if (this.fullnameFormControl.invalid || this.emailFormControl.invalid  || this.passwordFormControl.invalid) {
       this.toastrService.error('Verifique os campos', 'Erro ao atualizar dados:');
       this.listUsersService.notifyUsersUpdated();
       return;
     }
 
-    const { name, email, login, password } = this.data;
+    const { fullname, email, username, password } = this.data;
 
-    this.updateUsersService.updateUsers(name, email, login, password).subscribe(
+    this.updateUsersService.updateUsers(fullname, email, username, password).subscribe(
        () => {
         this.toastrService.success('Campo(s) alterado(s) com sucesso', 'Alteração bem sucedida!'),
         this.dialogRef.close();
@@ -88,9 +88,9 @@ export class ModalListusersComponent {
 
   
   deletar(){
-    const login = this.data.login;
+    const username = this.data.username;
 
-    this.deleteUsersService.deleteUsers(login).subscribe(
+    this.deleteUsersService.deleteUsers(username).subscribe(
       (response) => {
         this.toastrService.success('Usuário deletado com sucesso!');
         

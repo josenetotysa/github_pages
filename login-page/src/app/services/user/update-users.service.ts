@@ -12,12 +12,12 @@ export class UpdateUsersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  updateUsers(name: string, email: string, login: string, password: string): Observable<UserResponse[]> {
+  updateUsers(fullname: string, email: string, username: string, password: string): Observable<UserResponse[]> {
     const token = sessionStorage.getItem('auth-token');
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.httpClient.put<UserResponse[]>(`${this.apiUrl}/update`,  { name, email, login, password } , { headers: headers })
+    return this.httpClient.put<UserResponse[]>(`${this.apiUrl}/update`,  { fullname, email, username, password } , { headers: headers })
   }
 }
