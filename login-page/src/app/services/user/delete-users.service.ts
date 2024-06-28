@@ -19,21 +19,16 @@ export class DeleteUsersService {
   deleteUsers(username: string): Observable<any>{
     const token = sessionStorage.getItem('auth-token');
 
-  //   const headers = new HttpHeaders({
-  //     'Authorization': `Bearer ${token}`
-  //   });
-  //   return this.httpClient.delete(`${this.apiUrl}/delete`, login , { headers: headers })
-  // }
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json' // Especificando o tipo de conteúdo como JSON
+      'Content-Type': 'application/json' 
     });
 
     const options = {
       headers: headers,
-      body: { username: username } // Enviando o login como parte do corpo da requisição
+      body: { username: username } 
     };
-    // this.listUsersService.notifyUsersUpdated()
+
     return this.httpClient.delete<any>(`${this.apiUrl}/delete`, options);
   }
 }

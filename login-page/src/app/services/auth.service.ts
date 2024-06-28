@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../types/login-response.type';
-import { BehaviorSubject, interval, tap } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, interval, of, switchMap, takeUntil, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { TokenValidationResponse } from '../types/token-validation-response.type'; // Importe o tipo
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,12 @@ export class AuthService {
 
   private apiUrl: string = "http://localhost:8080/auth"; 
   private loggedIn: BehaviorSubject<boolean>; 
-  private tokenExpirationCheckInterval = 10000; // 1 minute in milliseconds
-  private tokenExpirationThreshold = 40000; // 5 minutes in milliseconds
+  private tokenExpirationCheckInterval = 300000; // 5 minutos
+  private stopChecking = new Subject<void>();
 
   constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService) { 
     
-    this.loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated()); 
-    console.log('Entrou no construtor');
+    this.loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
     this.startTokenExpirationCheck();
   }
 
@@ -34,15 +34,10 @@ export class AuthService {
   }
 
   signup(fullname: string, email: string, username: string, password: string){
-    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { fullname, email, username, password }).pipe(
-      tap((value) => {
-        // sessionStorage.setItem("auth-token", value.token)
-      })
-    );
+    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { fullname, email, username, password });
   }
 
   isAuthenticated(): boolean {
-    // Verificar se o token está presente no sessionStorage
     return !!sessionStorage.getItem('auth-token');
   }
 
@@ -57,42 +52,48 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem('auth-token');
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('fullname');
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
+    this.stopChecking.next(); 
   }
 
-
   private startTokenExpirationCheck(): void {
-    console.log('Iniciando verificação de expiração do token');
-  
     interval(this.tokenExpirationCheckInterval).pipe(
-     
-      tap(() => {
-        console.log('Entrou no intervalo');
+      takeUntil(this.stopChecking),
+      switchMap(() => {
         const token = sessionStorage.getItem('auth-token');
         if (token) {
-          const expirationDate = this.getTokenExpirationDate(token);
-          const currentTime = new Date().getTime();
-          const timeToExpiration = expirationDate.getTime() - currentTime;
-  
-          if (timeToExpiration <= 0) {
-            console.log('Token expirado. Realizando logout automático.');
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+          return this.httpClient.get<TokenValidationResponse>(`${this.apiUrl}/check-token`, { headers }).pipe(
+            catchError((error) => {
+              console.error('Check token error:', error);
+              return of({ status: 'error' });
+            })
+          );
+        }
+        return of({ status: 'no-token' });
+      }),
+      tap((response: TokenValidationResponse) => {
+        switch (response.status) {
+          case 'error':
             this.logout();
-          } else if (timeToExpiration < this.tokenExpirationThreshold) {
-            console.log('Token está próximo da expiração.');
+            break;
+          case 'about to expire':
             this.notifyTokenExpiration();
-          }
+            break;
+          case 'valid':
+            break;
+          default:
+            break;
         }
       })
     ).subscribe();
   }
-  
   private notifyTokenExpiration(): void {
-    // Notifica o usuário sobre a proximidade da expiração do token
     this.toastService.info('Você será deslogado em breve.', 'Token está prestes a expirar.');
   }
-  
+
   private getTokenExpirationDate(token: string): Date {
     const decodedToken = JSON.parse(atob(token.split('.')[1]));
     return new Date(decodedToken.exp * 1000);

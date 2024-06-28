@@ -15,6 +15,7 @@
         <mat-label>Operadora</mat-label>
         <input matInput [(ngModel)]="data.operadora" disabled>
     </mat-form-field>
+    
     <mat-form-field hintLabel="Máximo 10 characters">
         <mat-label>RN2</mat-label>
         <input matInput #rn2 maxlength="10" [(ngModel)]="data.rn2" [formControl]="rn2FormControl">
