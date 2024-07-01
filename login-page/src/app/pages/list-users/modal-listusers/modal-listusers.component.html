@@ -8,11 +8,11 @@
 <div mat-dialog-content class="container-all">
     <div class="container-conteudo">
         <mat-form-field>
-            <mat-label>Username</mat-label>
+            <mat-label>USERNAME</mat-label>
             <input matInput [(ngModel)]="data.username" disabled>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Nome</mat-label>
+            <mat-label>NOME</mat-label>
             <input matInput [(ngModel)]="data.fullname" [formControl]="fullnameFormControl">
             <mat-error *ngIf="fullnameFormControl.hasError('required')">
                 Nome é <strong>obrigatório</strong>
@@ -22,7 +22,7 @@
             </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Email</mat-label>
+            <mat-label>EMAIL</mat-label>
             <input matInput [(ngModel)]="data.email" [formControl]="emailFormControl">
             <mat-error *ngIf="emailFormControl.hasError('required')">
                 Email é <strong>obrigatório</strong>
@@ -41,7 +41,7 @@
         </mat-form-field> -->
 
         <mat-form-field *ngIf="showPasswordField">
-            <mat-label>Senha</mat-label>
+            <mat-label>SENHA</mat-label>
             <input matInput [(ngModel)]="data.password" type="password" [formControl]="passwordFormControl">
             <mat-error *ngIf="passwordFormControl.hasError('required')">
                 Senha é <strong>obrigatório</strong>

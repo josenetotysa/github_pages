@@ -5,6 +5,7 @@ import { LoginResponse } from '../types/login-response.type';
 import { BehaviorSubject, Subject, catchError, interval, of, switchMap, takeUntil, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TokenValidationResponse } from '../types/token-validation-response.type'; // Importe o tipo
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +96,17 @@ export class AuthService {
   }
 
   private getTokenExpirationDate(token: string): Date {
-    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    const decodedToken: any = jwtDecode(token);
     return new Date(decodedToken.exp * 1000);
+  }
+
+  getCurrentUser(): string | null {
+    const token = sessionStorage.getItem('auth-token');
+  
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.sub;
+    }
+    return null;
   }
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-import { UserResponse } from '../../types/user-response.type';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { ListUsersService } from './list-users.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,22 @@ export class DeleteUsersService {
 
   constructor(
     private httpClient: HttpClient,
-    private listUsersService: ListUsersService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
-  deleteUsers(username: string): Observable<any>{
-    const token = sessionStorage.getItem('auth-token');
+  deleteUsers(username: string): Observable<any> {
+    const authToken = sessionStorage.getItem('auth-token');
+
+    if (!authToken) {
+      // Redirecionar para a página de login se não houver token
+      this.router.navigate(['/login']);
+      return throwError('Token de autenticação não encontrado');
+    }
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json' 
+      'Authorization': `Bearer ${authToken}`,
+      'Content-Type': 'application/json'
     });
 
     const options = {
@@ -29,6 +37,20 @@ export class DeleteUsersService {
       body: { username: username } 
     };
 
-    return this.httpClient.delete<any>(`${this.apiUrl}/delete`, options);
+
+    return this.httpClient.delete<any>(`${this.apiUrl}/delete`, options).pipe(
+      tap(() => {
+        // Se o usuário atual estiver deletando a própria conta, deslogar
+        if (username === this.authService.getCurrentUser()) {
+
+          this.authService.logout(); // Método de logout que limpa o token e redireciona para /login
+        }
+      }),
+      catchError(error => {
+        // Tratar erros de deleção de usuário, se necessário
+        console.error('Erro ao deletar usuário:', error);
+        return throwError(error);
+      })
+    );
   }
 }

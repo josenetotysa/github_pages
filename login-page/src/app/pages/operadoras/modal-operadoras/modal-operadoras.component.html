@@ -12,7 +12,7 @@
         <input matInput [(ngModel)]="data.rn1" disabled>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Operadora</mat-label>
+        <mat-label>OPERADORA</mat-label>
         <input matInput [(ngModel)]="data.operadora" disabled>
     </mat-form-field>
     
@@ -25,7 +25,7 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field hintLabel="Máximo 3 characters">
-        <mat-label>Rel</mat-label>
+        <mat-label>REL</mat-label>
         <input matInput #rel maxlength="3" [(ngModel)]="data.rel" [formControl]="relFormControl">
         <mat-hint align="end">{{rel.value.length}}/3</mat-hint>
         <mat-error *ngIf="relFormControl.hasError('required')">

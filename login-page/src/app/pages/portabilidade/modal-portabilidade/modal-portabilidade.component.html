@@ -8,15 +8,15 @@
   <div class="container-conteudo">
     <p>Telephone Number(s)</p>
     <mat-form-field>
-      <mat-label>##</mat-label>
+      <mat-label>CN</mat-label>
       <input matInput [(ngModel)]="data.cn" disabled>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>####</mat-label>
+      <mat-label>PREFIXO</mat-label>
       <input matInput [(ngModel)]="data.prefixo" disabled>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>####</mat-label>
+      <mat-label>MDCU</mat-label>
       <input matInput [(ngModel)]="data.sufixo" disabled>
     </mat-form-field>
   </div>
@@ -33,12 +33,12 @@
     </mat-form-field> -->
 
     <mat-form-field hintLabel="Máximo 4 characters">
-      <mat-label>XXXX</mat-label>
+      <mat-label>PREFIXO</mat-label>
       <input matInput #prefixoV maxlength="4" [formControl]="prefixoVFormControl">
       <mat-hint align="end">{{prefixoV.value.length}}/4</mat-hint>
     </mat-form-field>
     <mat-form-field hintLabel="Máximo 4 characters">
-      <mat-label>XXXX</mat-label>
+      <mat-label>MDCU</mat-label>
       <input matInput #sufixoV maxlength="4"[formControl]="sufixoVFormControl">
       <mat-hint align="end">{{sufixoV.value.length}}/4</mat-hint>
     </mat-form-field>

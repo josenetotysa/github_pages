@@ -10,6 +10,7 @@ import { UpdateUsersService } from '../../../services/user/update-users.service'
 import { DeleteUsersService } from '../../../services/user/delete-users.service';
 import { ListUsersService } from '../../../services/user/list-users.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-modal-listusers',
@@ -33,7 +34,6 @@ export class ModalListusersComponent {
   passwordFormControl = new FormControl(this.data.password);
  
   showPasswordField = false;
-
   
   constructor(
     public dialogRef: MatDialogRef<ModalListusersComponent>,
@@ -41,7 +41,8 @@ export class ModalListusersComponent {
     private updateUsersService: UpdateUsersService,
     private deleteUsersService: DeleteUsersService,
     private listUsersService: ListUsersService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthService
   ) { }
 
   onNoClick(): void {
@@ -89,19 +90,22 @@ export class ModalListusersComponent {
   
   deletar(){
     const username = this.data.username;
+    const currentUser = this.authService.getCurrentUser(); 
 
     this.deleteUsersService.deleteUsers(username).subscribe(
       (response) => {
         this.toastrService.success('Usuário deletado com sucesso!');
         
-        this.dialogRef.close();
+        if (username === currentUser) {
+          this.dialogRef.close();
+        } else {
+          this.listUsersService.notifyUsersUpdated();
+          this.dialogRef.close();
+        }
       },
       (error) => {
         this.toastrService.error('Erro ao deletar usuário:', error);
         
-      },
-      () => {
-        this.listUsersService.notifyUsersUpdated();
       }
     );
   }
