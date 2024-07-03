@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+
+    console.log("Entrou no app")
     this.authService.isAuthenticated();
   }
 }

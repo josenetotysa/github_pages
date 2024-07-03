@@ -88,6 +88,8 @@ export class OperadorasComponent {
   ) { }
 
   ngOnInit() {
+
+    console.log("Entrou na operadora")
     this.dataSource.sort = this.sort;
     this.loadOperadoras();
     this.subscribeToOperadorasUpdated();

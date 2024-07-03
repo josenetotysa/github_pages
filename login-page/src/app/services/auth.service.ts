@@ -16,11 +16,14 @@ export class AuthService {
   private loggedIn: BehaviorSubject<boolean>; 
   private tokenExpirationCheckInterval = 300000; // 5 minutos
   private stopChecking = new Subject<void>();
+  private isAdminSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService) { 
     
     this.loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
     this.startTokenExpirationCheck();
+    this.checkAdminRole(); 
   }
 
   authenticate(username: string, password: string) { 
@@ -30,12 +33,13 @@ export class AuthService {
         sessionStorage.setItem("fullname", value.fullname); 
         this.router.navigate(['/home']); 
         this.loggedIn.next(true);
+        this.checkAdminRole();
       })
     );
   }
 
   signup(fullname: string, email: string, username: string, password: string){
-    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { fullname, email, username, password });
+    return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { fullname, email, username, password});
   }
 
   isAuthenticated(): boolean {
@@ -49,12 +53,14 @@ export class AuthService {
   login(token: string): void {
     sessionStorage.setItem('auth-token', token);
     this.loggedIn.next(true);
+    this.checkAdminRole();
   }
 
   logout(): void {
     sessionStorage.removeItem('auth-token');
     sessionStorage.removeItem('fullname');
     this.loggedIn.next(false);
+    this.isAdminSubject.next(false); 
     this.router.navigate(['/login']);
     this.stopChecking.next(); 
   }
@@ -108,5 +114,47 @@ export class AuthService {
       return decodedToken.sub;
     }
     return null;
+  }
+  
+  // checkAdminRole(): boolean {
+  //   const token = sessionStorage.getItem('auth-token');
+  //   if (token) {
+  //     try {
+  //       const decodedToken: any = jwtDecode(token);
+  //       if (decodedToken && decodedToken.roles) {
+  //         const roles: string[] = decodedToken.roles;
+  //         return roles.includes('ROLE_ADMIN');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error decoding token:', error);
+  //     }
+  //   }
+  //   return false;
+  // }
+
+  private checkAdminRole(): void {
+    const token = sessionStorage.getItem('auth-token');
+
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      const roles: string[] = decodedToken.roles || []; // Modificado para evitar erro
+
+      console.log(decodedToken); 
+
+      if (roles.includes('ROLE_ADMIN')) {
+        this.isAdminSubject.next(true);
+      } else {
+        this.isAdminSubject.next(false);
+      }
+    } else {
+      this.isAdminSubject.next(false);
+    }
+  }
+
+
+
+  // Getter para acessar o BehaviorSubject isAdminSubject
+  get isAdmin(): BehaviorSubject<boolean> {
+    return this.isAdminSubject;
   }
 }

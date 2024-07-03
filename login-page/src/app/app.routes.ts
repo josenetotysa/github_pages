@@ -11,6 +11,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthguardService } from './services/not-authguard.service';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { MaterialTestComponent } from './material-test/material-test.component';
+import { AdminpanelComponent } from './teste/adminpanel/adminpanel.component';
 
 export const routes: Routes = [
     {
@@ -56,8 +57,8 @@ export const routes: Routes = [
     },
 
     {
-        path: "materialTeste",
-        component: MaterialTestComponent,
+        path: "teste",
+        component: AdminpanelComponent,
     },
 
     {

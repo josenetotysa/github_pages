@@ -87,6 +87,8 @@ export class ListUsersComponent {
   ) { }
 
   ngOnInit() {
+
+    console.log("Entrou no list")
     this.dataSource.sort = this.sort;
     this.loadUsers();
     this.subscribeToUsersUpdated();

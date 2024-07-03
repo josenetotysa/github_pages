@@ -84,6 +84,8 @@ export class PortabilidadeComponent {
   ) { }
 
   ngOnInit() {
+
+    console.log("Entrou na portabilidade")
     this.dataSource.sort = this.sort;
     this.loadPortabilidade();
     this.subscribeToPortabilidadeUpdated();

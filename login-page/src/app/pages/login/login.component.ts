@@ -55,5 +55,7 @@ export class LoginComponent {
     } else {
       this.toastService.error('Formulário inválido', 'Por favor, preencha todos os campos corretamente.');
     }
+
+    
   }
 }

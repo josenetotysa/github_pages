@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    console.log("Entrou no home")
+
     if (this.authService.isAuthenticated()) {
       const fullname = sessionStorage.getItem("fullname");
       if (fullname) {
