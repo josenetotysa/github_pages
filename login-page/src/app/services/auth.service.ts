@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject, catchError, interval, of, switchMap, takeUnti
 import { ToastrService } from 'ngx-toastr';
 import { TokenValidationResponse } from '../types/token-validation-response.type'; // Importe o tipo
 import { jwtDecode } from 'jwt-decode';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,12 @@ export class AuthService {
   private isAdminSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
-  constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService) { 
+  constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService, private eventService: EventService) { 
     
     this.loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
     this.startTokenExpirationCheck();
     this.checkAdminRole(); 
+    
   }
 
   authenticate(username: string, password: string) { 
@@ -34,6 +36,7 @@ export class AuthService {
         this.router.navigate(['/home']); 
         this.loggedIn.next(true);
         this.checkAdminRole();
+        this.eventService.emitLoginEvent();
       })
     );
   }
@@ -50,12 +53,6 @@ export class AuthService {
     return this.loggedIn;
   }
 
-  login(token: string): void {
-    sessionStorage.setItem('auth-token', token);
-    this.loggedIn.next(true);
-    this.checkAdminRole();
-  }
-
   logout(): void {
     sessionStorage.removeItem('auth-token');
     sessionStorage.removeItem('fullname');
@@ -63,6 +60,8 @@ export class AuthService {
     this.isAdminSubject.next(false); 
     this.router.navigate(['/login']);
     this.stopChecking.next(); 
+
+    this.eventService.emitLogoutEvent();
   }
 
   private startTokenExpirationCheck(): void {
@@ -138,8 +137,6 @@ export class AuthService {
     if (token) {
       const decodedToken: any = jwtDecode(token);
       const roles: string[] = decodedToken.roles || []; // Modificado para evitar erro
-
-      console.log(decodedToken); 
 
       if (roles.includes('ROLE_ADMIN')) {
         this.isAdminSubject.next(true);

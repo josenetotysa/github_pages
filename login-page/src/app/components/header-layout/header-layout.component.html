@@ -1,6 +1,6 @@
 <header>
     <nav class="menu" [style.justify-content]="justifyContentStyle">
-        <img src="/assets/svg/logo_tysa.svg" alt="Logo_Tysa">
-        <app-menu-dropdown *ngIf="(isLoggedIn$ | async) && (isAdmin$ | async)?.isAdmin" [isAdmin]="(isAdmin$ | async)?.isAdmin"></app-menu-dropdown>
+      <img src="/assets/svg/logo_tysa.svg" alt="Logo_Tysa">
+      <app-menu-dropdown *ngIf="isLoggedIn"></app-menu-dropdown>
     </nav>
-</header>
+  </header>

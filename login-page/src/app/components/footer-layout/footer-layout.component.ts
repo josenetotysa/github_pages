@@ -10,19 +10,19 @@ import { map } from 'rxjs/operators';
   templateUrl: './footer-layout.component.html',
   styleUrl: './footer-layout.component.scss'
 })
-export class FooterLayoutComponent{
+export class FooterLayoutComponent implements OnInit{
   currentDateTime: string = '';
 
   constructor(private dataHoraService: DataHoraService) { }
 
-  // ngOnInit(): void {
+  ngOnInit(): void {
 
-  //   console.log("Entrou no footer")
-  //   // Atualiza a cada segundo
-  //   interval(1000).pipe(
-  //     map(() => this.dataHoraService.getCurrentDateTimeFormatted())
-  //   ).subscribe(dateTime => {
-  //     this.currentDateTime = dateTime;
-  //   });
-  // }
+    console.log("Entrou no footer")
+    // Atualiza a cada segundo
+    interval(1000).pipe(
+      map(() => this.dataHoraService.getCurrentDateTimeFormatted())
+    ).subscribe(dateTime => {
+      this.currentDateTime = dateTime;
+    });
+  }
 }

@@ -16,13 +16,4 @@ export class AdminpanelComponent {
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.authService.isAdmin.subscribe(isAdmin => {
-      this.isAdmin = isAdmin;
-      if (!isAdmin) {
-        // Redirecionar ou mostrar uma mensagem de erro se o usuário não for administrador
-      }
-    });
-  }
-
 }
