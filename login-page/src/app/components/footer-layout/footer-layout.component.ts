@@ -17,7 +17,7 @@ export class FooterLayoutComponent implements OnInit{
 
   ngOnInit(): void {
 
-    console.log("Entrou no footer")
+    // console.log("Entrou no footer")
     // Atualiza a cada segundo
     interval(1000).pipe(
       map(() => this.dataHoraService.getCurrentDateTimeFormatted())

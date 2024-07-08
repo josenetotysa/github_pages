@@ -13,8 +13,7 @@ import { EventService } from './event.service';
 })
 export class AuthService { 
 
-  private apiUrl: string = "http://localhost:8080/auth"; 
-  private loggedIn: BehaviorSubject<boolean>; 
+  private apiUrl: string = "http://localhost:8080/auth";
   private tokenExpirationCheckInterval = 300000; // 5 minutos
   private stopChecking = new Subject<void>();
   private isAdminSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -22,7 +21,6 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService, private eventService: EventService) { 
     
-    this.loggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
     this.startTokenExpirationCheck();
     this.checkAdminRole(); 
     
@@ -34,7 +32,6 @@ export class AuthService {
         sessionStorage.setItem("auth-token", value.token); 
         sessionStorage.setItem("fullname", value.fullname); 
         this.router.navigate(['/home']); 
-        this.loggedIn.next(true);
         this.checkAdminRole();
         this.eventService.emitLoginEvent();
       })
@@ -49,14 +46,9 @@ export class AuthService {
     return !!sessionStorage.getItem('auth-token');
   }
 
-  getLoggedInStatus(): BehaviorSubject<boolean> {
-    return this.loggedIn;
-  }
-
   logout(): void {
     sessionStorage.removeItem('auth-token');
     sessionStorage.removeItem('fullname');
-    this.loggedIn.next(false);
     this.isAdminSubject.next(false); 
     this.router.navigate(['/login']);
     this.stopChecking.next(); 
@@ -148,10 +140,10 @@ export class AuthService {
     }
   }
 
-
-
   // Getter para acessar o BehaviorSubject isAdminSubject
   get isAdmin(): BehaviorSubject<boolean> {
+
+    console.log(`dentro de auth service, retornou: ${this.isAdminSubject.value}`)
     return this.isAdminSubject;
   }
 }

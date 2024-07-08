@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EventService } from '../../services/event.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -15,46 +16,50 @@ import { EventService } from '../../services/event.service';
   styleUrl: './header-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush 
 })
-export class HeaderLayoutComponent implements OnInit{
-  
+export class HeaderLayoutComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   justifyContentStyle: string = 'center';
-  private loginSubscription: Subscription = new Subscription();
-  private logoutSubscription: Subscription = new Subscription();
+  private loginSubscription: Subscription;
+  private logoutSubscription: Subscription;
 
-  constructor(private eventService: EventService, private cdr: ChangeDetectorRef) {}
+  constructor(private eventService: EventService, private authService: AuthService, private cdr: ChangeDetectorRef) {
+    this.loginSubscription = new Subscription();
+    this.logoutSubscription = new Subscription();
+    // console.log('Construtor: Subscrições inicializadas');
+  }
 
   ngOnInit(): void {
+    // console.log('ngOnInit: Componente inicializado');
+    this.isLoggedIn = this.authService.isAuthenticated(); // Verifica se está autenticado ao inicializar
+
+    // Inscreve-se nos eventos do EventService para login e logout
     this.loginSubscription = this.eventService.getLoginEvent().subscribe(() => {
-      this.onLoginSuccess();
+      // console.log('Evento de Login Recebido');
+      this.isLoggedIn = true;
+      this.updateJustifyContentStyle();
     });
 
     this.logoutSubscription = this.eventService.getLogoutEvent().subscribe(() => {
-      this.onLogout();
+      // console.log('Evento de Logout Recebido');
+      this.isLoggedIn = false;
+      this.updateJustifyContentStyle();
     });
+
+    this.updateJustifyContentStyle();
   }
 
-  // ngOnDestroy(): void {
-  //   this.loginSubscription.unsubscribe();
-  //   this.logoutSubscription.unsubscribe();
-  // }
-
-
-  onLoginSuccess() {
-    console.log('Usuário logado com sucesso! Executando função no HeaderLayoutComponent...');
-    this.isLoggedIn = true;
-    this.justifyContentStyle = 'space-between';
-    console.log('isLoggedIn:', this.isLoggedIn);
-    console.log('justifyContentStyle:', this.justifyContentStyle);
-    this.cdr.detectChanges(); // Detecta mudanças explicitamente
+  ngOnDestroy(): void {
+    // console.log('ngOnDestroy: Componente destruído');
+    this.loginSubscription.unsubscribe();
+    this.logoutSubscription.unsubscribe();
+    // console.log('Subscrições canceladas');
   }
-  
-  onLogout() {
-    console.log('Usuário deslogado! Executando função no HeaderLayoutComponent...');
-    this.isLoggedIn = false;
-    this.justifyContentStyle = 'center';
-    console.log('isLoggedIn:', this.isLoggedIn);
-    console.log('justifyContentStyle:', this.justifyContentStyle);
+
+  private updateJustifyContentStyle() {
+    // console.log('updateJustifyContentStyle: Atualizando justifyContentStyle');
+    this.justifyContentStyle = this.isLoggedIn ? 'space-between' : 'center';
+    // console.log(`justifyContentStyle definido para: ${this.justifyContentStyle}`);
     this.cdr.detectChanges(); // Detecta mudanças explicitamente
+    // console.log('Detecção de mudanças acionada');
   }
 }

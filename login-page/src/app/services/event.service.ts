@@ -1,26 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private loginEventSubject = new Subject<void>();
-  private logoutEventSubject = new Subject<void>();
+  private loginSubject: Subject<void> = new Subject<void>();
+  private logoutSubject: Subject<void> = new Subject<void>();
+  private adminChangeSubject: Subject<boolean> = new Subject<boolean>(); // Novo subject para mudanças de admin
 
-  emitLoginEvent() {
-    this.loginEventSubject.next();
+  emitLoginEvent(): void {
+    console.log('Emitindo evento de login...');
+    this.loginSubject.next();
   }
 
-  getLoginEvent() {
-    return this.loginEventSubject.asObservable();
+  emitLogoutEvent(): void {
+    console.log('Emitindo evento de logout...');
+    this.logoutSubject.next();
   }
 
-  emitLogoutEvent() {
-    this.logoutEventSubject.next();
+  getLoginEvent(): Observable<void> {
+    return this.loginSubject.asObservable();
   }
 
-  getLogoutEvent() {
-    return this.logoutEventSubject.asObservable();
+  getLogoutEvent(): Observable<void> {
+    return this.logoutSubject.asObservable();
   }
+
 }
