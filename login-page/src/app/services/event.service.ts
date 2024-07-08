@@ -7,7 +7,7 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 export class EventService {
   private loginSubject: Subject<void> = new Subject<void>();
   private logoutSubject: Subject<void> = new Subject<void>();
-  private adminChangeSubject: Subject<boolean> = new Subject<boolean>(); // Novo subject para mudanças de admin
+  private adminChangeSubject: Subject<boolean> = new Subject<boolean>(); // Subject para mudanças de admin
 
   emitLoginEvent(): void {
     console.log('Emitindo evento de login...');
@@ -19,12 +19,22 @@ export class EventService {
     this.logoutSubject.next();
   }
 
+
   getLoginEvent(): Observable<void> {
     return this.loginSubject.asObservable();
   }
 
   getLogoutEvent(): Observable<void> {
     return this.logoutSubject.asObservable();
+  }
+
+  emitAdminChangeEvent(isAdmin: boolean): void {
+    console.log('Emitindo evento de mudança de admin...');
+    this.adminChangeSubject.next(isAdmin);
+  }
+
+  getAdminChangeEvent(): Observable<boolean> {
+    return this.adminChangeSubject.asObservable();
   }
 
 }
