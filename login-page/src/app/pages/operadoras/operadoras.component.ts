@@ -1,13 +1,13 @@
-import { Component, Injectable, ViewChild, inject } from '@angular/core';
+import { Component, Injectable, ViewChild } from '@angular/core';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TitlesComponent } from '../../components/titles/titles.component';
-import { MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { MatInputModule} from '@angular/material/input';
-import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatPaginator, MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalOperadorasComponent } from './modal-operadoras/modal-operadoras.component';
 import { OperadoraResponse } from '../../types/operadora-response.type';
@@ -23,19 +23,19 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
   override previousPageLabel = 'Página anterior';
   override firstPageLabel = 'Primeira página';
   override lastPageLabel = 'Última página';
-  
-  override getRangeLabel: (page: number, pageSize: number, length: number) => string = 
+
+  override getRangeLabel: (page: number, pageSize: number, length: number) => string =
     (page: number, pageSize: number, length: number): string => {
-    if (length === 0 || pageSize === 0) {
-      return `0 de ${length}`;
-    }
-    length = Math.max(length, 0);
-    const startIndex = page * pageSize;
-    const endIndex = startIndex < length ?
+      if (length === 0 || pageSize === 0) {
+        return `0 de ${length}`;
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize;
+      const endIndex = startIndex < length ?
         Math.min(startIndex + pageSize, length) :
         startIndex + pageSize;
-    return `${startIndex + 1} - ${endIndex} de ${length}`;
-  };
+      return `${startIndex + 1} - ${endIndex} de ${length}`;
+    };
 }
 
 @Component({
@@ -57,7 +57,7 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
   templateUrl: './operadoras.component.html',
   styleUrl: './operadoras.component.scss',
 
-  providers: [{provide: MatPaginatorIntl, useClass: CustomPaginatorIntl}],
+  providers: [{ provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }],
 })
 export class OperadorasComponent {
 
@@ -74,10 +74,10 @@ export class OperadorasComponent {
     this.dataSource.sort = this.sort;
 
     setTimeout(() => {
-    const sortState: Sort = { active: 'routernumber', direction: 'asc' };
-    this.sort.active = sortState.active;
-    this.sort.direction = sortState.direction;
-    this.sort.sortChange.emit(sortState);
+      const sortState: Sort = { active: 'routernumber', direction: 'asc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
     });
   }
 
@@ -88,8 +88,6 @@ export class OperadorasComponent {
   ) { }
 
   ngOnInit() {
-
-    console.log("Entrou na operadora")
     this.dataSource.sort = this.sort;
     this.loadOperadoras();
     this.subscribeToOperadorasUpdated();
@@ -101,23 +99,23 @@ export class OperadorasComponent {
         this.dataSource.data = operadoras;
       },
       (error) => {
-        this.toastService.error('Ocorreu um erro ao tentar carregar os dados.', 'Erro ao carregar Routing Numbers', );
+        this.toastService.error('Ocorreu um erro ao tentar carregar os dados.', 'Erro ao carregar Routing Numbers',);
       }
     );
   }
 
   applyFilter(event: Event) {
-    // Captura o valor do filtro, remove espaços em branco e converte para minúsculas
+
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-  
-    // Define o predicado de filtro para a fonte de dados
+
+
     this.dataSource.filterPredicate = (data: OperadoraResponse, filter: string) => {
-      // Verifica se o valor do filtro está presente no routernumber ou telconame
-      return data.routernumber.toLowerCase().includes(filter) || 
-             data.telconame.toLowerCase().includes(filter);
+
+      return data.routernumber.toLowerCase().includes(filter) ||
+        data.telconame.toLowerCase().includes(filter);
     };
-  
-    // Aplica o filtro à fonte de dados
+
+
     this.dataSource.filter = filterValue;
   }
 

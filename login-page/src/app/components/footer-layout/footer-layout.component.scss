@@ -7,14 +7,16 @@ footer {
     font-size: 12px;
     padding: 10px 0 15px 0;
 
-    .date-hour{
+    .date-hour {
         font-size: 14px;
         color: $text-fontNormal-color;
     }
-    p{
+
+    p {
         margin: 0;
     }
-    span{
+
+    span {
         color: $text-fontLight-color;
     }
 }

@@ -18,7 +18,7 @@
     
     <mat-form-field hintLabel="Máximo 10 characters">
         <mat-label>RN2</mat-label>
-        <input matInput #rn2 maxlength="10" [(ngModel)]="data.rn2" [formControl]="rn2FormControl">
+        <input matInput #rn2 maxlength="10" [(ngModel)]="data.rn2" [formControl]="rn2FormControl" cdkFocusInitial>
         <mat-hint align="end">{{rn2.value.length}}/10</mat-hint>
         <mat-error *ngIf="rn2FormControl.hasError('maxlength')">
             Deve ter no máximo 10 caracteres

@@ -9,22 +9,21 @@ import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.comp
 import { OperadorasComponent } from './pages/operadoras/operadoras.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { NotAuthguardService } from './services/not-authguard.service';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { MaterialTestComponent } from './material-test/material-test.component';
-import { AdminpanelComponent } from './teste/adminpanel/adminpanel.component';
+import { AdminGuard } from './services/admin-guard.service';
 
 export const routes: Routes = [
     {
         path: "login",
         component: LoginComponent,
         canActivate: [NotAuthguardService]
-    
+
     },
 
     {
         path: "signup",
         component: SignupComponent,
         // canActivate: [AuthGuard]
+        canActivate: [AdminGuard]
     },
 
     {
@@ -49,16 +48,6 @@ export const routes: Routes = [
         path: "operadoras",
         component: OperadorasComponent,
         canActivate: [AuthGuard]
-    },
-
-    {
-        path: "forgotPassword",
-        component: ForgotPasswordComponent,
-    },
-
-    {
-        path: "teste",
-        component: AdminpanelComponent,
     },
 
     {

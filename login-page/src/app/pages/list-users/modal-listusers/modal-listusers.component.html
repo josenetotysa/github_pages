@@ -13,7 +13,7 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>NOME</mat-label>
-            <input matInput [(ngModel)]="data.fullname" [formControl]="fullnameFormControl">
+            <input matInput [(ngModel)]="data.fullname" [formControl]="fullnameFormControl" cdkFocusInitial>
             <mat-error *ngIf="fullnameFormControl.hasError('required')">
                 Nome é <strong>obrigatório</strong>
             </mat-error>
@@ -34,11 +34,6 @@
                 Deve ter no máximo 60 caracteres
             </mat-error>
         </mat-form-field>
-
-        <!-- <mat-form-field>
-            <mat-label>Senha</mat-label>
-            <input matInput [(ngModel)]="data.password">
-        </mat-form-field> -->
 
         <mat-form-field *ngIf="showPasswordField">
             <mat-label>SENHA</mat-label>

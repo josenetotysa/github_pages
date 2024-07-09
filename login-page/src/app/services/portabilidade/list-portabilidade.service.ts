@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject  } from 'rxjs';
 import { PortabilidadeResponse } from '../../types/portabilidade-response.type';
-import { PortabilidadeComponent } from '../../pages/portabilidade/portabilidade.component';
 
 @Injectable({
   providedIn: 'root'

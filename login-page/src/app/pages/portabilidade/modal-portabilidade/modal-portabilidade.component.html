@@ -20,21 +20,12 @@
       <input matInput [(ngModel)]="data.sufixo" disabled>
     </mat-form-field>
   </div>
+
   <div class="container-conteudo">
     <p>Virtual Number(s)</p>
-
-    <!-- <mat-form-field>
-      <mat-label>XXXX</mat-label>
-      <input matInput [(ngModel)]="data.prefixoV">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>XXXX</mat-label>
-      <input matInput [(ngModel)]="data.sufixoV">
-    </mat-form-field> -->
-
     <mat-form-field hintLabel="Máximo 4 characters">
       <mat-label>PREFIXO</mat-label>
-      <input matInput #prefixoV maxlength="4" [formControl]="prefixoVFormControl">
+      <input matInput #prefixoV maxlength="4" [formControl]="prefixoVFormControl" cdkFocusInitial>
       <mat-hint align="end">{{prefixoV.value.length}}/4</mat-hint>
     </mat-form-field>
     <mat-form-field hintLabel="Máximo 4 characters">

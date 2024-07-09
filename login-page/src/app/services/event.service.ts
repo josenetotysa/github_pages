@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +7,17 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 export class EventService {
   private loginSubject: Subject<void> = new Subject<void>();
   private logoutSubject: Subject<void> = new Subject<void>();
-  private adminChangeSubject: Subject<boolean> = new Subject<boolean>(); // Subject para mudanças de admin
+  private adminChangeEvent = new Subject<boolean>();
+  private reloadPageSubject = new Subject<void>();
+
 
   emitLoginEvent(): void {
-    console.log('Emitindo evento de login...');
     this.loginSubject.next();
   }
 
   emitLogoutEvent(): void {
-    console.log('Emitindo evento de logout...');
     this.logoutSubject.next();
   }
-
 
   getLoginEvent(): Observable<void> {
     return this.loginSubject.asObservable();
@@ -29,12 +28,24 @@ export class EventService {
   }
 
   emitAdminChangeEvent(isAdmin: boolean): void {
-    console.log('Emitindo evento de mudança de admin...');
-    this.adminChangeSubject.next(isAdmin);
+    console.log("Foi emitido o evento emitAdminchange")
+    setTimeout(() => {
+      this.adminChangeEvent.next(isAdmin);
+      console.log(`adminChangeEvent foi mudado para: ${isAdmin}`)
+    }, 0);
   }
 
-  getAdminChangeEvent(): Observable<boolean> {
-    return this.adminChangeSubject.asObservable();
+  getAdminChangeEvent() {
+    console.log("Foi emitido o evento getAdminChange")
+    return this.adminChangeEvent.asObservable();
+  }
+
+  emitReloadPageEvent(): void { // Método para emitir evento de recarregar página
+    this.reloadPageSubject.next();
+  }
+
+  getReloadPageEvent(): Observable<void> { // Método para obter o Observable do evento de recarregar página
+    return this.reloadPageSubject.asObservable();
   }
 
 }

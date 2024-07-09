@@ -37,9 +37,10 @@ ul li a:hover {
     background-color: $dropdown-menu-color;
 }
 
-.endpoint_drop:hover{
+.endpoint_drop:hover {
     border-radius: 0 0 15px 15px !important;
 }
+
 ul li:hover ul.dropdown {
     display: block;
 }

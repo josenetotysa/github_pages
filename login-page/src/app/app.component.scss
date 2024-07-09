@@ -1,20 +1,20 @@
 @import "../styles/variables.scss";
 
 
-.conteiner{
+.conteiner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: $bg-color;
     min-height: 100vh;
-    
-    app-header-layout{
+
+    app-header-layout {
         width: 100%;
-        
+
     }
 
-    app-footer-layout{
+    app-footer-layout {
         width: 100%;
     }
 

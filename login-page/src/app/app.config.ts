@@ -16,10 +16,8 @@ export const appConfig: ApplicationConfig = {
       timeOut: 2500,
       closeButton: true,
       easing: 'ease-in',
-      preventDuplicates: true, 
+      preventDuplicates: true,
       progressBar: true
-      // positionClass: 'toast-right',
-      // preventDuplicates: true,
 
     }),
     provideHttpClient(withFetch()), provideAnimationsAsync(), provideAnimationsAsync()

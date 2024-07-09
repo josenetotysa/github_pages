@@ -30,8 +30,8 @@ $custom-primary-palette: (
     600: #fff,  
     700: #fff,  
     800: #fff,  
-    900: #fff   // Faltava uma vírgula aqui
-  )   // Fechamento do mapa de contraste
+    900: #fff   
+  )  
 );
 
 $custom-primary: mat.define-palette($custom-primary-palette);
@@ -47,19 +47,6 @@ $custom-theme: mat.define-light-theme((
   density: 0,
    ));
 
-
-// $my-primary: mat.define-palette(mat.$indigo-palette, 500);
-// $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// $my-theme: mat.define-light-theme((
-//  color: (
-//    primary: $my-primary,
-//    accent: $my-accent,
-//  ),
-//  typography: mat.define-typography-config(),
-//  density: 0,
-// ));
-
 @include mat.all-component-themes($custom-theme);
 
 * {
@@ -72,5 +59,4 @@ $custom-theme: mat.define-light-theme((
 
 html, body {
   height: 100%;
-  // color: $text-fontNormal-color;
 }
