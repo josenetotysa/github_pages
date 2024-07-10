@@ -17,6 +17,7 @@ export class AuthService {
   private tokenExpirationCheckInterval = 300000; // 5 minutos
   private stopChecking = new Subject<void>();
   private isAdminSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isAdminOn = false;
 
 
   constructor(private httpClient: HttpClient, private router: Router, private toastService: ToastrService, private eventService: EventService) {
@@ -34,11 +35,6 @@ export class AuthService {
         this.loggedIn.next(true);
         this.checkAdminRole();
         this.eventService.emitLoginEvent();
-
-          // Emitir evento de recarregar página se o usuário for admin
-          if (this.isAdminSubject.value) {
-            this.eventService.emitReloadPageEvent();
-          }
       })
     );
   }
@@ -59,6 +55,7 @@ export class AuthService {
     this.isAdminSubject.next(false);
     this.router.navigate(['/login']);
     this.stopChecking.next();
+    this.isAdminOn = false; // Resetar a variável isAdmin
     this.eventService.emitLogoutEvent();
   }
 
@@ -128,18 +125,21 @@ export class AuthService {
       const isAdmin = this.hasAdminRole(token);
   
       this.isAdminSubject.next(isAdmin);
-
-      console.log(`CheckAdmin = dentro do authserivce isAdmin: ${isAdmin}`);
-      console.log(`CheckAdmin = dentro do authserivce isAdminSubject: ${this.isAdminSubject.value}`);
       this.eventService.emitAdminChangeEvent(isAdmin);
+
+      this.isAdminOn = this.isAdminSubject.value;
   
       
     } else {
-      console.log(`CheckAdmin = caso não seja isAdmin: ${this.isAdminSubject.value}`);
-      console.log(`CheckAdmin = caso não seja isAdminSubject: ${this.isAdminSubject.value}`);
+
+      this.isAdminOn = false;
       this.isAdminSubject.next(false);
       this.eventService.emitAdminChangeEvent(false);
     }
+  }
+
+  getAdmin(): boolean {
+    return this.isAdminOn;
   }
 
   get isAdmin(): BehaviorSubject<boolean> {

@@ -5,8 +5,6 @@ import { FooterLayoutComponent } from './components/footer-layout/footer-layout.
 import { HeaderLayoutComponent } from './components/header-layout/header-layout.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthService } from './services/auth.service';
-import { TestBehaviorSubject } from './test-behavior-subject/test-behavior-subject.component';
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,8 +16,7 @@ import { TestBehaviorSubject } from './test-behavior-subject/test-behavior-subje
     RouterOutlet,
     FooterLayoutComponent,
     HeaderLayoutComponent,
-    MatSlideToggleModule,
-    TestBehaviorSubject
+    MatSlideToggleModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

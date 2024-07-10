@@ -7,9 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListUsersComponent } from './pages/list-users/list-users.component';
 import { PortabilidadeComponent } from './pages/portabilidade/portabilidade.component';
 import { OperadorasComponent } from './pages/operadoras/operadoras.component';
-import { AuthGuard } from './services/auth-guard.service';
-import { NotAuthguardService } from './services/not-authguard.service';
-import { AdminGuard } from './services/admin-guard.service';
+import { AuthGuard } from './services/guards/auth-guard.service';
+import { NotAuthguardService } from './services/guards/not-authguard.service';
+import { AdminGuard } from './services/guards/admin-guard.service';
 
 export const routes: Routes = [
     {
@@ -22,7 +22,6 @@ export const routes: Routes = [
     {
         path: "signup",
         component: SignupComponent,
-        // canActivate: [AuthGuard]
         canActivate: [AdminGuard]
     },
 

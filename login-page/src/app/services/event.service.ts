@@ -28,24 +28,12 @@ export class EventService {
   }
 
   emitAdminChangeEvent(isAdmin: boolean): void {
-    console.log("Foi emitido o evento emitAdminchange")
     setTimeout(() => {
       this.adminChangeEvent.next(isAdmin);
-      console.log(`adminChangeEvent foi mudado para: ${isAdmin}`)
     }, 0);
   }
 
   getAdminChangeEvent() {
-    console.log("Foi emitido o evento getAdminChange")
     return this.adminChangeEvent.asObservable();
   }
-
-  emitReloadPageEvent(): void { // Método para emitir evento de recarregar página
-    this.reloadPageSubject.next();
-  }
-
-  getReloadPageEvent(): Observable<void> { // Método para obter o Observable do evento de recarregar página
-    return this.reloadPageSubject.asObservable();
-  }
-
 }

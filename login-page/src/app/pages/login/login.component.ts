@@ -49,13 +49,13 @@ export class LoginComponent {
   submit() {
     if (this.loginForm.valid) {
       this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password).subscribe({
-        next: () => this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido'),
+        next: () => {
+          this.toastService.success('Bem-vindo de volta!', 'Login bem-sucedido');
+        },
         error: () => this.toastService.error('Ops, algo deu errado!', 'Erro de credenciais')
       });
     } else {
       this.toastService.error('Formulário inválido', 'Por favor, preencha todos os campos corretamente.');
     }
-
-    
   }
 }

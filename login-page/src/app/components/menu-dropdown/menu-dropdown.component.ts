@@ -19,7 +19,7 @@ export class MenuDropdownComponent implements OnInit, OnDestroy {
   isAdminMenu: boolean = false;
   private adminChangeEventSubscription: Subscription | null = null;
 
-  constructor(private authService: AuthService, private eventService: EventService, private cdr: ChangeDetectorRef) { }
+  constructor(private eventService: EventService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.adminChangeEventSubscription = this.eventService.getAdminChangeEvent().subscribe((isAdmin) => {

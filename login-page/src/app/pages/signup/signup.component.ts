@@ -60,7 +60,10 @@ export class SignupComponent {
         this.signupForm.value.username,
         this.signupForm.value.password
       ).subscribe({
-        next: () => this.toastService.success('Usuário Cadastrado!', 'Cadastro realizado com sucesso!'),
+        next: () => {
+          this.toastService.success('Usuário Cadastrado!', 'Cadastro realizado com sucesso!');
+          this.signupForm.reset(); // Reseta o formulário após sucesso
+        },
         error: () => this.toastService.error('Ops! Algo deu errado.', 'Erro ao tentar realizar o cadastro. Por favor, tente novamente mais tarde.')
       });
     } else {
