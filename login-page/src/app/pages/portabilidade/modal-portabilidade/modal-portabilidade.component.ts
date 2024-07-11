@@ -48,6 +48,11 @@ export class ModalPortabilidadeComponent {
     this.dialogRef.close();
   }
 
+  Limpar() {
+    this.prefixoVFormControl.setValue('');
+    this.sufixoVFormControl.setValue('');
+  }
+
   submit() {
     
     if (this.prefixoVFormControl.invalid || this.sufixoVFormControl.invalid) {

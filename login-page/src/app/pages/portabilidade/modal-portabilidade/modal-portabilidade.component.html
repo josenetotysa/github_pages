@@ -4,6 +4,7 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
+
 <div mat-dialog-content class="container-all">
   <div class="container-conteudo">
     <p>Telephone Number(s)</p>
@@ -37,7 +38,11 @@
   </div>
 
 </div>
+
 <div mat-dialog-actions>
-  <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-  <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="submit()">Alterar</button>
+  <div><button id="button-red" class="custom-button" mat-button (click)="Limpar()">Limpar</button></div>
+  <div id="side-button">
+      <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
+      <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="submit()">Alterar</button>
+  </div>
 </div>

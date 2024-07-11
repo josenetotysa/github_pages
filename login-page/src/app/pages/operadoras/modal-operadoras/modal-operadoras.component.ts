@@ -28,7 +28,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ModalOperadorasComponent {
 
   rn2FormControl = new FormControl(this.data.rn2, [Validators.maxLength(10)]);
-  relFormControl = new FormControl(this.data.rel, [Validators.required, Validators.maxLength(3)]);
+  relFormControl = new FormControl(this.data.rel, [Validators.maxLength(3)]);
   
 
   constructor(
@@ -49,6 +49,12 @@ export class ModalOperadorasComponent {
     this.dialogRef.close();
   }
 
+  Limpar() {
+    this.relFormControl.setValue('');
+    this.rn2FormControl.setValue('');
+  }
+
+
   submit() {
     
     
@@ -57,7 +63,13 @@ export class ModalOperadorasComponent {
       this.listOperadorasService.notifyOperadorasUpdated();
       return;
     }
-    const { rn1, rn2, rel } = this.data;
+
+    let { rn1, rn2, rel } = this.data;
+
+    // Define o valor padrão para rel se não for passado
+    if (rel == null || rel == "") {
+      rel = 41;
+    }
 
     this.updateOperadorasService.updateOperadoras( rn1, rn2, rel ).subscribe(
       () => {

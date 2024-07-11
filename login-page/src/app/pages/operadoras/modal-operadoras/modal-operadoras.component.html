@@ -38,6 +38,9 @@
 </div>
 </div>
 <div mat-dialog-actions>
-    <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
-    <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="submit()">Alterar</button>
-</div>
+    <div><button id="button-red" class="custom-button" mat-button (click)="Limpar()">Limpar</button></div>
+    <div id="side-button">
+        <button class="custom-button" mat-button (click)="onNoClick()">Cancelar</button>
+        <button class="custom-button" mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="submit()">Alterar</button>
+    </div>
+  </div>

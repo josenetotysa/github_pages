@@ -63,6 +63,27 @@ p{
     transition: background-color 0.3s ease;
 }
 
+#side-button{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#button-red{
+    background-color:  #f44336;
+
+    
+}
+
+#button-red:hover{
+        background-color: $red-logo;
+    }
+
+.custom-button:hover {
+    background-color: $second-color;
+}
+
+
 .custom-button:hover {
     background-color: $second-color;
 }
