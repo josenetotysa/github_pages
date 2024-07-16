@@ -84,7 +84,4 @@ export class ModalOperadorasComponent {
       }
     );
   }
-
-
-  
 }

@@ -1,20 +1,20 @@
 <ul>
     <li class="menu"><a [routerLink]="['/home']" class="menu-title">Home</a></li>
     <li class="menu">
-        <a class="menu-title">Usuário<img src="/assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
+        <a class="menu-title">Usuário<img src="assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
         <ul class="dropdown">
             <li *ngIf="isAdminMenu"><a [routerLink]="['/signup']">Cadastrar novo</a></li>
             <li><a [routerLink]="['/listUsers']" class="endpoint_drop">Listar</a></li>
         </ul>
     </li>
     <li class="menu">
-        <a class="menu-title">Portabilidade<img src="/assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
+        <a class="menu-title">Portabilidade<img src="assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
         <ul class="dropdown">
             <li><a [routerLink]="['/portabilidade']" class="endpoint_drop">Listar</a></li>
         </ul>
     </li>
     <li class="menu">
-        <a class="menu-title">Operadoras<img src="/assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
+        <a class="menu-title">Operadoras<img src="assets/png/dropdown-menu-icon.png" alt="icon-dropdown"></a>
         <ul class="dropdown">
             <li><a [routerLink]="['/operadoras']" class="endpoint_drop">Listar</a></li>
         </ul>
