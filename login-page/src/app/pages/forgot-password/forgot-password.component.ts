@@ -25,8 +25,7 @@ export class ForgotPasswordComponent {
     forgotForm: FormGroup;
 
     constructor(
-        private authService: AuthService,
-        private toastService: ToastrService
+        private authService: AuthService
       ) {
         this.forgotForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),

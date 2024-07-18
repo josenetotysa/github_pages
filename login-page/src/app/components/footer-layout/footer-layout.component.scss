@@ -1,15 +1,13 @@
 @import "../../../styles/variables.scss";
 
 footer {
-    background-color: $footer-color;
     width: 100%;
     text-align: center;
     font-size: 12px;
-    padding: 10px 0 15px 0;
 
     .date-hour {
         font-size: 14px;
-        color: $text-fontNormal-color;
+        color: #fff;
     }
 
     p {
@@ -17,6 +15,19 @@ footer {
     }
 
     span {
-        color: $text-fontLight-color;
+         color: #ffffffbf;
+    }
+    #top-footer{
+        background-color: #0A4E6B;
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+    #bottom-footer{
+        border: 1px solid #073B4F;
+        background-color: #073B4F;
+        height: 14px;
+        width: 100%;
+        padding-bottom: 10px;
     }
 }
