@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class DeleteUsersService {
 
-  private apiUrl: string = 'http://localhost:8080/user';
+  private apiUrl: string = 'http://localhost:8080/login_auth_api/user';
 
   constructor(
     private httpClient: HttpClient,

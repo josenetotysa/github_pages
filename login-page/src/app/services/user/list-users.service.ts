@@ -8,7 +8,7 @@ import { UserResponse } from '../../types/user-response.type';
 })
 export class ListUsersService {
 
-  private apiUrl: string = 'http://localhost:8080/user';
+  private apiUrl: string = 'http://localhost:8080/login_auth_api/user';
   private usersUpdatedSubject = new Subject<void>();
 
   constructor(private httpClient: HttpClient) { }

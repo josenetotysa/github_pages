@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UpdateOperadorasService {
 
   
-  private apiUrl: string = 'http://localhost:8080/operadora';
+  private apiUrl: string = 'http://localhost:8080/login_auth_api/operadora';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -11,7 +11,7 @@ import { PortabilidadeResponse } from '../../types/portabilidade-response.type';
 export class UpdatePortabilidadeService {
 
   
-  private apiUrl: string = 'http://localhost:8080/portabilidade';
+  private apiUrl: string = 'http://localhost:8080/login_auth_api/portabilidade';
 
   constructor(private httpClient: HttpClient) { }
 
