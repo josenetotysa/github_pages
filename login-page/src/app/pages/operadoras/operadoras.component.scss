@@ -83,6 +83,10 @@ app-titles{
     background-color: $second-color;
 }
 
+.custom-button:focus{
+    box-shadow: inset 0 0 0 2px #212121;
+}
+
 @media (max-width: 650px) {
     table {
         font-size: 12px; /* Reduzir o tamanho da fonte para telas menores */

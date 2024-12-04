@@ -5,7 +5,5 @@ export type PortabilidadeResponse = {
         cn?: string;
         prefixo?: string;
         sufixo?: string;
-        prefixoV?: string;
-        sufixoV?: string;
-    
+        prefixoMcdu?: string;
 }

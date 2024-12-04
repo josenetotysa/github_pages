@@ -29,11 +29,8 @@
         flex-wrap: nowrap;
         justify-content: space-between;
     }
-}
 
-.container-title{
-    display: flex;
-    margin-top: 10px;
+
 }
 
 app-titles {
@@ -53,9 +50,6 @@ app-titles {
 section {
     width: 680px;
 }
-
-
-
 
 .container-filter {
     display: flex;
@@ -87,6 +81,12 @@ section {
 .custom-button:hover {
     background-color: $second-color;
 }
+
+#padding_leftMcdu{
+    text-align: center;
+}
+
+
 
 @media (max-width: 650px) {
     table {

@@ -27,8 +27,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ModalPortabilidadeComponent {
 
-  prefixoVFormControl = new FormControl(this.data.prefixoV, [Validators.maxLength(4)]);
-  sufixoVFormControl = new FormControl(this.data.sufixoV, [Validators.maxLength(4)]);
+  prefixoMcduFormControl = new FormControl(this.data.prefixoMcdu, [Validators.maxLength(10), Validators.minLength(8)]);
+
 
   constructor(
     public dialogRef: MatDialogRef<ModalPortabilidadeComponent>,
@@ -49,13 +49,12 @@ export class ModalPortabilidadeComponent {
   }
 
   Limpar() {
-    this.prefixoVFormControl.setValue('');
-    this.sufixoVFormControl.setValue('');
+    this.prefixoMcduFormControl.setValue('');
   }
 
   submit() {
     
-    if (this.prefixoVFormControl.invalid || this.sufixoVFormControl.invalid) {
+    if (this.prefixoMcduFormControl.invalid) {
       this.toastrService.error('Verifique os campos', 'Erro ao atualizar dados:');
       this.listPortabilidadeService.notifyPortabilidadeUpdated();
       return;
@@ -63,7 +62,7 @@ export class ModalPortabilidadeComponent {
     
     const { cn, prefixo, sufixo } = this.data;
     const realnumber = `${cn}${prefixo}${sufixo}`;
-    const virtualnumber = `${this.prefixoVFormControl.value}${this.sufixoVFormControl.value}`;
+    const virtualnumber = `${this.prefixoMcduFormControl.value}`;
 
     this.updatePortabilidadeService.updatePortabilidade(realnumber, virtualnumber).subscribe(
       () => {

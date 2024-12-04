@@ -8,7 +8,7 @@ import { OperadoraResponse } from '../../types/operadora-response.type';
 })
 export class ListOperadorasService {
 
-  private apiUrl: string = 'http://localhost:8080/login_auth_api/operadora';
+  private apiUrl: string = 'http://10.21.255.127:8080/login_auth_api/operadora';
   private operadorasUpdatedSubject = new Subject<void>();
 
   constructor(private httpClient: HttpClient) { }

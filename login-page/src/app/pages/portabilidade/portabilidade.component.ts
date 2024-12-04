@@ -8,7 +8,6 @@ import { MatPaginator, MatPaginatorModule, MatPaginatorIntl } from '@angular/mat
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalPortabilidadeComponent } from './modal-portabilidade/modal-portabilidade.component';
-import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { PortabilidadeResponse } from '../../types/portabilidade-response.type';
 import { Subscription } from 'rxjs';
 import { ListPortabilidadeService } from '../../services/portabilidade/list-portabilidade.service';
@@ -48,8 +47,7 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
     MatPaginator,
     MatPaginatorModule,
     CommonModule,
-    MatDialogModule,
-    MatSortModule
+    MatDialogModule
   ],
   templateUrl: './portabilidade.component.html',
   styleUrl: './portabilidade.component.scss',
@@ -58,24 +56,15 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
 })
 export class PortabilidadeComponent {
 
-  displayedColumns: string[] = ['cn', 'prefixo', 'sufixo', 'prefixoV', 'sufixoV', 'editar'];
+  displayedColumns: string[] = ['cn', 'prefixo', 'sufixo', 'prefixoMcdu', 'editar'];
   dataSource = new MatTableDataSource<PortabilidadeResponse>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   private portabilidadeUpdatedSubscription: Subscription | undefined;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-    setTimeout(() => {
-      const sortState: Sort = { active: 'cn', direction: 'asc' };
-      this.sort.active = sortState.active;
-      this.sort.direction = sortState.direction;
-      this.sort.sortChange.emit(sortState);
-    });
   }
   constructor(
     private listPortabilidadeService: ListPortabilidadeService,
@@ -83,7 +72,6 @@ export class PortabilidadeComponent {
   ) { }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
     this.loadPortabilidade();
     this.subscribeToPortabilidadeUpdated();
   }
@@ -100,8 +88,7 @@ export class PortabilidadeComponent {
             prefixo: realnumber.substring(2, 6),
             sufixo: realnumber.substring(6, 10),
 
-            prefixoV: virtualnumber.substring(0, 4),
-            sufixoV: virtualnumber.substring(4, 8)
+            prefixoMcdu: virtualnumber
           };
         });
         this.dataSource.data = transformedData;
@@ -115,7 +102,7 @@ export class PortabilidadeComponent {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
 
     this.dataSource.filterPredicate = (data: PortabilidadeResponse, filter: string) => {
-      return data.realnumber.toLowerCase().includes(filter)
+      return (data.realnumber.includes(filter) || data.virtualnumber.includes(filter))
     };
 
     this.dataSource.filter = filterValue;
@@ -124,7 +111,7 @@ export class PortabilidadeComponent {
   openDialog(element: PortabilidadeResponse): void {
     const dialogRef = this.dialog.open(ModalPortabilidadeComponent, {
       width: '600px',
-      data: { cn: element.cn, prefixo: element.prefixo, sufixo: element.sufixo, prefixoV: element.prefixoV, sufixoV: element.sufixoV }
+      data: { cn: element.cn, prefixo: element.prefixo, sufixo: element.sufixo, prefixoMcdu: element.prefixoMcdu }
     });
 
     dialogRef.afterClosed().subscribe(result => {

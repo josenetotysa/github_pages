@@ -17,22 +17,18 @@
       <input matInput [(ngModel)]="data.prefixo" disabled>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>MDCU</mat-label>
+      <mat-label>MCDU</mat-label>
       <input matInput [(ngModel)]="data.sufixo" disabled>
     </mat-form-field>
   </div>
 
   <div class="container-conteudo">
     <p>Virtual Number(s)</p>
-    <mat-form-field hintLabel="Máximo 4 characters">
-      <mat-label>PREFIXO</mat-label>
-      <input matInput #prefixoV maxlength="4" [formControl]="prefixoVFormControl" cdkFocusInitial>
-      <mat-hint align="end">{{prefixoV.value.length}}/4</mat-hint>
-    </mat-form-field>
-    <mat-form-field hintLabel="Máximo 4 characters">
-      <mat-label>MDCU</mat-label>
-      <input matInput #sufixoV maxlength="4"[formControl]="sufixoVFormControl">
-      <mat-hint align="end">{{sufixoV.value.length}}/4</mat-hint>
+    <mat-form-field hintLabel="Min: 08 - Max: 10">
+      <mat-label></mat-label>
+      <input onkeypress="return event.charCode >= 48 && event.charCode <= 57" matInput #prefixoMcdu maxlength="10" minlength="8" 
+      [formControl]="prefixoMcduFormControl" cdkFocusInitial (keydown.enter)="submit()">
+      <mat-hint align="end">{{prefixoMcdu.value.length}}/10</mat-hint>
     </mat-form-field>
   </div>
 
