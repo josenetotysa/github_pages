@@ -10,7 +10,6 @@
     span{
         display: inline-block;
         font-weight: 600;
-        margin-bottom: 10px;
     }
 
 }
@@ -27,4 +26,40 @@ a {
     text-decoration: underline;
     cursor: pointer;
     
+}
+
+.header_content{
+    margin: 1rem;
+}
+
+.header_content > p{
+    margin: 0;
+}
+
+.dashboard_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* Card styles */
+    background-color: #fff; 
+    border: 1px solid $primary-color;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    width: 300px; 
+    margin: 20px auto; 
+    text-align: center; 
+}
+
+.dashboard_content > p {
+    margin: 0 0 10px 0; 
+    font: bold 1rem $font-secondary;
+    color: $primary-color; 
+}
+
+.dashboard_content > span {
+    font: bold 2rem $font-secondary;
+    color: $red-logo; 
 }

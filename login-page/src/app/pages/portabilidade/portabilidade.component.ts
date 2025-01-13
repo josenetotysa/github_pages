@@ -100,11 +100,20 @@ export class PortabilidadeComponent {
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-
+  
+    // Configurando o filtro para lidar com valores nulos ou indefinidos
     this.dataSource.filterPredicate = (data: PortabilidadeResponse, filter: string) => {
-      return (data.realnumber.includes(filter) || data.virtualnumber.includes(filter))
+      // Garantir que virtualnumber seja uma string válida
+      const virtualnumber = data.virtualnumber || ''; // Tratar virtualnumber como string vazia se for null ou undefined
+  
+      // Verificar se o filtro corresponde a realnumber ou virtualnumber
+      return (
+        data.realnumber.includes(filter) || 
+        virtualnumber.includes(filter)
+      );
     };
-
+  
+    // Aplicar o valor do filtro
     this.dataSource.filter = filterValue;
   }
 

@@ -12,7 +12,7 @@ import { EventService } from './event.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = "http://10.21.255.127:8080/login_auth_api/auth";
+  private apiUrl: string = "http://localhost:8080/login_auth_api/auth";
   private loggedIn: BehaviorSubject<boolean>;
   private tokenExpirationCheckInterval = 300000; // 5 minutos
   private stopChecking = new Subject<void>();
