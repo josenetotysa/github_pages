@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserResponse } from '../../types/user-response.type';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { UserResponse } from '../../types/user-response.type';
 })
 export class UpdateUsersService {
 
-  private apiUrl: string = 'http://localhost:8080/login_auth_api/user';
+  private apiUrl: string = 'http://10.21.255.127:8080/login_auth_api/user';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,6 +18,6 @@ export class UpdateUsersService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.httpClient.put<UserResponse[]>(`${this.apiUrl}/update`,  { fullname, email, username, password } , { headers: headers })
+    return this.httpClient.put<UserResponse[]>(`${this.apiUrl}/update`, { fullname, email, username, password }, { headers: headers })
   }
 }

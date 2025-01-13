@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class DeleteUsersService {
 
-  private apiUrl: string = 'http://localhost:8080/login_auth_api/user';
+  private apiUrl: string = 'http://10.21.255.127:8080/login_auth_api/user';
 
   constructor(
     private httpClient: HttpClient,
@@ -32,7 +32,7 @@ export class DeleteUsersService {
 
     const options = {
       headers: headers,
-      body: { username: username } 
+      body: { username: username }
     };
 
 
@@ -40,7 +40,7 @@ export class DeleteUsersService {
       tap(() => {
         if (username === this.authService.getCurrentUser()) {
 
-          this.authService.logout(); 
+          this.authService.logout();
         }
       }),
       catchError(error => {

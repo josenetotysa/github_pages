@@ -8,7 +8,7 @@ import { UserResponse } from '../../types/user-response.type';
 })
 export class ListUsersService {
 
-  private apiUrl: string = 'http://localhost:8080/login_auth_api/user';
+  private apiUrl: string = 'http://10.21.255.127:8080/login_auth_api/user';
   private usersUpdatedSubject = new Subject<void>();
 
   constructor(private httpClient: HttpClient) { }
@@ -25,7 +25,7 @@ export class ListUsersService {
   getUsersUpdatedObservable(): Observable<void> {
     return this.usersUpdatedSubject.asObservable();
   }
-  
+
   notifyUsersUpdated(): void {
     this.usersUpdatedSubject.next();
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject  } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { OperadoraResponse } from '../../types/operadora-response.type';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { OperadoraResponse } from '../../types/operadora-response.type';
 })
 export class ListOperadorasService {
 
-  private apiUrl: string = 'http://localhost:8080/login_auth_api/operadora';
+  private apiUrl: string = 'http://10.21.255.127:8080/login_auth_api/operadora';
   private operadorasUpdatedSubject = new Subject<void>();
 
   constructor(private httpClient: HttpClient) { }
@@ -22,7 +22,7 @@ export class ListOperadorasService {
 
     return this.httpClient.get<OperadoraResponse[]>(`${this.apiUrl}/list`, { headers: headers });
   }
-  
+
   getOperadorasUpdatedObservable(): Observable<void> {
     return this.operadorasUpdatedSubject.asObservable();
   }
