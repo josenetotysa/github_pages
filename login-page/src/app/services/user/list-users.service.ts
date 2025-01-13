@@ -25,7 +25,7 @@ export class ListUsersService {
   getUsersUpdatedObservable(): Observable<void> {
     return this.usersUpdatedSubject.asObservable();
   }
-  
+
   notifyUsersUpdated(): void {
     this.usersUpdatedSubject.next();
   }

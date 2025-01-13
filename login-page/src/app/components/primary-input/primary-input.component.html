@@ -1,18 +1,29 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility_off" />
+
 <div class="input-wrapper">
     <label [for]="inputName">{{ label }}</label>
 
     <div class="input-content">
-        <input
-            [type]="type"
-            [placeholder]="placeholder"
-            [formControl]="formControl"
-            (input)="onInput($event)"
-        />
+        <input [type]="type" [placeholder]="placeholder" [formControl]="formControl" (input)="onInput($event)" />
+
+        <!-- Verifique se o tipo é 'password' ou 'text' antes de exibir -->
+        <button *ngIf="showPasswordToggle && (type === 'password' || type === 'text')" type="button"
+            (click)="onTogglePassword()">
+            <mat-icon *ngIf="type === 'password'">visibility</mat-icon>
+            <mat-icon *ngIf="type === 'text'">visibility_off</mat-icon>
+        </button>
+
     </div>
+
     <div *ngIf="formControl.invalid && formControl.touched" class="error-message">
         <span *ngIf="formControl.errors?.['required']">{{ label }} é obrigatório.<br></span>
-        <span *ngIf="formControl.errors?.['minlength']">{{ label }} deve ter no mínimo {{ formControl.errors?.['minlength']?.requiredLength }} caracteres.<br></span>
-        <span *ngIf="formControl.errors?.['maxlength']">{{ label }} deve ter no máximo {{ formControl.errors?.['maxlength']?.requiredLength }} caracteres.<br></span>
+        <span *ngIf="formControl.errors?.['minlength']">{{ label }} deve ter no mínimo {{
+            formControl.errors?.['minlength']?.requiredLength }} caracteres.<br></span>
+        <span *ngIf="formControl.errors?.['maxlength']">{{ label }} deve ter no máximo {{
+            formControl.errors?.['maxlength']?.requiredLength }} caracteres.<br></span>
         <span *ngIf="formControl.errors?.['email']">Formato de email inválido.<br></span>
     </div>
 </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../types/login-response.type';
-import { BehaviorSubject, Observable, Subject, catchError, interval, of, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, interval, of, switchMap, takeUntil, tap, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TokenValidationResponse } from '../types/token-validation-response.type';
 import { jwtDecode } from 'jwt-decode';
@@ -26,18 +26,36 @@ export class AuthService {
     this.checkAdminRole();
   }
 
+  // authenticate(username: string, password: string) {
+  //   return this.httpClient.post<LoginResponse>(`${this.apiUrl}/login`, { username, password }).pipe(
+  //     tap((value) => {
+  //       sessionStorage.setItem("auth-token", value.token);
+  //       sessionStorage.setItem("fullname", value.fullname);
+  //       this.router.navigate(['/home']);
+  //       this.loggedIn.next(true);
+  //       this.checkAdminRole();
+  //       this.eventService.emitLoginEvent();
+  //     })
+  //   );
+  // }
+
   authenticate(username: string, password: string) {
     return this.httpClient.post<LoginResponse>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap((value) => {
-        sessionStorage.setItem("auth-token", value.token);
-        sessionStorage.setItem("fullname", value.fullname);
+        sessionStorage.setItem('auth-token', value.token);
+        sessionStorage.setItem('fullname', value.fullname);
         this.router.navigate(['/home']);
         this.loggedIn.next(true);
         this.checkAdminRole();
         this.eventService.emitLoginEvent();
+      }),
+      catchError((error) => {
+        // Repassa o erro para o componente tratar
+        return throwError(() => error);
       })
     );
   }
+
 
   signup(fullname: string, email: string, username: string, password: string) {
     return this.httpClient.post<LoginResponse>(this.apiUrl + "/register", { fullname, email, username, password });
@@ -123,13 +141,13 @@ export class AuthService {
     const token = sessionStorage.getItem('auth-token');
     if (token) {
       const isAdmin = this.hasAdminRole(token);
-  
+
       this.isAdminSubject.next(isAdmin);
       this.eventService.emitAdminChangeEvent(isAdmin);
 
       this.isAdminOn = this.isAdminSubject.value;
-  
-      
+
+
     } else {
 
       this.isAdminOn = false;
@@ -143,7 +161,7 @@ export class AuthService {
   }
 
   get isAdmin(): BehaviorSubject<boolean> {
-       return this.isAdminSubject;
+    return this.isAdminSubject;
   }
 
   isAdminUser(): Observable<boolean> {

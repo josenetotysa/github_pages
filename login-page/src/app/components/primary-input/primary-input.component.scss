@@ -1,10 +1,19 @@
 @import "../../../styles/variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+
 .input-wrapper {
-
     color: $text-fontNormal-color;
-
     text-align: start;
 
     label {
@@ -16,15 +25,39 @@
     .input-content {
         width: 100%;
         border-radius: 4px;
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+
+
+        border: 1px solid $border-color;
+        border-radius: 4px;
+
+
 
         input {
-            background-color: $white-color;
-            border: 1px solid $border-color;
+
+            border: none;
             border-radius: 4px;
             outline: 0;
             padding: 8px 0px 8px 20px;
             width: 100%;
             font-size: 16px;
+        }
+
+        button {
+            // position: absolute; /* Posiciona o ícone dentro do campo */
+            // right: 10px; /* Ajusta a distância do ícone à direita */
+            // top: 50%;
+            // transform: translateY(-50%); /* Alinha verticalmente o ícone */
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+
+            margin-right: 10px;
+            
+            color: $primary-color;
         }
     }
 }

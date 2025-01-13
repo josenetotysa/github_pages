@@ -1,6 +1,13 @@
 <header>
   <nav class="menu" [style.justify-content]="justifyContentStyle">
-    <img src="assets/svg/logo_tysa.svg" alt="Logo_Tysa">
+    <ng-container *ngIf="isLoggedIn; else noLink">
+      <a [routerLink]="['/home']">
+        <img src="assets/svg/logo_tysa.svg" alt="Logo_Tysa">
+      </a>
+    </ng-container>
+    <ng-template #noLink>
+      <img src="assets/svg/logo_tysa.svg" alt="Logo_Tysa">
+    </ng-template>
     <app-menu-dropdown *ngIf="isLoggedIn"></app-menu-dropdown>
   </nav>
 </header>

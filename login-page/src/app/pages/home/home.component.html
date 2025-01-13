@@ -1,8 +1,16 @@
-   <section>
+<section>
       <div class="Logoff"><a (click)="logout()">SAIR</a></div>
-         <div class="content">
-               Você está logado com o usuário:<br>
-               <span>{{ fullname }}</span><br>
-         </div>
-         
-   </section>
+      <div class="content">
+        <section class="header_content">
+          <p>Você está logado com o usuário:</p>
+          <span>{{ fullname }}</span>
+        </section>
+    
+        <section class="dashboard_content">
+          <p>Números sem associação:</p>
+          <!-- Exibe a contagem de números inválidos -->
+          <span [ngClass]="{'color': invalidNumberCount === 0}">{{ invalidNumberCount }}</span>
+          <button (click)="openInvalidNumbersModal()">Ver Mais</button>
+        </section>
+      </div>
+    </section>

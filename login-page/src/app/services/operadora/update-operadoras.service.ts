@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OperadoraResponse } from '../../types/operadora-response.type';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UpdateOperadorasService {
 
-  
+
   private apiUrl: string = 'http://10.21.255.127:8080/login_auth_api/operadora';
 
   constructor(private httpClient: HttpClient) { }
@@ -21,7 +21,7 @@ export class UpdateOperadorasService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.httpClient.put<OperadoraResponse[]>(`${this.apiUrl}/update`,  { routernumber, telcomap, releasenumber } , { headers: headers })
+    return this.httpClient.put<OperadoraResponse[]>(`${this.apiUrl}/update`, { routernumber, telcomap, releasenumber }, { headers: headers })
   }
 
 }

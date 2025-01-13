@@ -1,0 +1,41 @@
+<section>
+  <div class="container-title">
+    <h2>Relatório</h2>
+    <button mat-icon-button class="close-button" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="container-content">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+      <!-- Coluna de Índice -->
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          {{ i + 1 }}
+        </td>
+      </ng-container>
+      
+      <!-- Coluna Número Real -->
+      <ng-container matColumnDef="realnumber">
+        <th mat-header-cell *matHeaderCellDef> Realnumber </th>
+        <td mat-cell *matCellDef="let element"> {{ element.realnumber }} </td>
+      </ng-container>
+      
+      <!-- Coluna Número Virtual -->
+      <ng-container matColumnDef="virtualnumber">
+        <th mat-header-cell *matHeaderCellDef> Virtualnumber </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.virtualnumber === null ? 'null' : element.virtualnumber }}
+        </td>
+      </ng-container>
+
+      <!-- Linhas da Tabela -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 200, 500]" showFirstLastButtons aria-label="Selecionar página dos números inválidos"></mat-paginator>
+  </div>
+
+</section>

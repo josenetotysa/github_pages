@@ -7,11 +7,13 @@ import { Subscription } from 'rxjs';
 import { EventService } from '../../services/event.service';
 import { AuthService } from '../../services/auth.service';
 
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-header-layout',
   standalone: true,
-  imports: [MenuDropdownComponent, CommonModule],
+  imports: [MenuDropdownComponent, CommonModule, RouterModule],
   templateUrl: './header-layout.component.html',
   styleUrl: './header-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

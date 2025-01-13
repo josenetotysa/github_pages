@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject  } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { OperadoraResponse } from '../../types/operadora-response.type';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class ListOperadorasService {
 
     return this.httpClient.get<OperadoraResponse[]>(`${this.apiUrl}/list`, { headers: headers });
   }
-  
+
   getOperadorasUpdatedObservable(): Observable<void> {
     return this.operadorasUpdatedSubject.asObservable();
   }

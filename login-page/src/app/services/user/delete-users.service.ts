@@ -32,7 +32,7 @@ export class DeleteUsersService {
 
     const options = {
       headers: headers,
-      body: { username: username } 
+      body: { username: username }
     };
 
 
@@ -40,7 +40,7 @@ export class DeleteUsersService {
       tap(() => {
         if (username === this.authService.getCurrentUser()) {
 
-          this.authService.logout(); 
+          this.authService.logout();
         }
       }),
       catchError(error => {

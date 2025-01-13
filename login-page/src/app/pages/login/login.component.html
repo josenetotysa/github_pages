@@ -1,26 +1,27 @@
 <section>
-    <app-titles class="center">Iniciar sessão</app-titles>
-  
-    <form [formGroup]="loginForm" (ngSubmit)="submit()">
-      <app-primary-input
-        formControlName="username"
-        [formControl]="loginControl"
-        inputName="username"
-        type="text"
-        label="Username"
-        placeholder="Ex: 123456"
-      ></app-primary-input>
-  
-      <app-primary-input
-        formControlName="password"
-        [formControl]="passwordControl"
-        inputName="password"
-        type="password"
-        label="Senha"
-      ></app-primary-input>
-  
-      <!-- <a [routerLink]="['/forgotPassword']">Esqueceu a senha?</a> -->
-  
-      <app-button-blue-click type="submit" [disabled]="loginForm.invalid">entrar</app-button-blue-click>
-    </form>
-  </section>
+  <app-titles class="center">Iniciar sessão</app-titles>
+
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <app-primary-input
+      formControlName="username"
+      [formControl]="loginControl"
+      inputName="username"
+      type="text"
+      label="Username"
+      placeholder="Ex: 123456"
+    ></app-primary-input>
+
+    <app-primary-input
+      formControlName="password"
+      [formControl]="passwordControl"
+      inputName="password"
+      [type]="passwordType"
+      label="Senha"
+      placeholder="Senha"
+      [showPasswordToggle]="true"
+      (togglePassword)="togglePasswordVisibility()"
+    ></app-primary-input>
+
+    <app-button-blue-click type="submit" [disabled]="loginForm.invalid">Entrar</app-button-blue-click>
+  </form>
+</section>

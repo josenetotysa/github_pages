@@ -53,26 +53,32 @@ export class ModalPortabilidadeComponent {
   }
 
   submit() {
-    
     if (this.prefixoMcduFormControl.invalid) {
       this.toastrService.error('Verifique os campos', 'Erro ao atualizar dados:');
       this.listPortabilidadeService.notifyPortabilidadeUpdated();
       return;
     }
-    
+  
     const { cn, prefixo, sufixo } = this.data;
     const realnumber = `${cn}${prefixo}${sufixo}`;
     const virtualnumber = `${this.prefixoMcduFormControl.value}`;
-
+  
     this.updatePortabilidadeService.updatePortabilidade(realnumber, virtualnumber).subscribe(
-      () => {
+      (response) => {
+        // Se o retorno for bem-sucedido, mostramos o sucesso
         this.toastrService.success('Campo(s) alterado(s) com sucesso', 'Alteração bem sucedida!');
         this.dialogRef.close();
       },
-      () => {
-        this.toastrService.error('Tente novamente', 'Erro ao atualizar dados:');
+      (error) => {
+        // Caso o número virtual já exista, mostramos o erro
+        if (error.status === 400 && error.error?.msg) {
+          this.toastrService.error(error.error.msg, 'Erro ao atualizar dados:');
+        } else {
+          this.toastrService.error('Tente novamente', 'Erro ao atualizar dados:');
+        }
       },
       () => {
+        // Isso notifica qualquer outro componente que possa precisar da atualização
         this.listPortabilidadeService.notifyPortabilidadeUpdated();
       }
     );
